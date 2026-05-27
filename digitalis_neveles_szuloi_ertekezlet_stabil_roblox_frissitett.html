@@ -1,0 +1,3689 @@
+<!doctype html>
+
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>
+      Digitális nevelés ötödik osztályban – stabil, Roblox-kockázatokkal
+      frissített verzió
+    </title>
+    <style>
+      :root {
+        --cream: #fff7ea;
+        --sand: #f2dfc3;
+        --mint: #dff5e7;
+        --aqua: #cbeef3;
+        --coral: #ffb199;
+        --gold: #ffd375;
+        --blue: #3b6ea8;
+        --teal: #2e8a82;
+        --green: #4e9a69;
+        --plum: #6d5aa7;
+        --red: #d96a65;
+        --ink: #172235;
+        --text: #2e4054;
+        --muted: #657484;
+        --card: rgba(255, 255, 255, 0.72);
+        --card2: rgba(255, 255, 255, 0.9);
+        --line: rgba(23, 34, 53, 0.13);
+        --shadow: 0 28px 90px rgba(37, 55, 79, 0.16);
+        --radius: 30px;
+        --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+        --font-scale: 1.15;
+        --display-scale: 1.06;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--cream);
+        color: var(--text);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+      }
+      body {
+        background:
+          radial-gradient(
+            circle at 10% 12%,
+            rgba(255, 211, 117, 0.36),
+            transparent 28rem
+          ),
+          radial-gradient(
+            circle at 88% 18%,
+            rgba(203, 238, 243, 0.55),
+            transparent 32rem
+          ),
+          radial-gradient(
+            circle at 78% 88%,
+            rgba(223, 245, 231, 0.68),
+            transparent 34rem
+          ),
+          linear-gradient(135deg, #fff7ea 0%, #f8ead1 42%, #eaf7ef 100%);
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.24;
+        background-image:
+          linear-gradient(rgba(23, 34, 53, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 34, 53, 0.055) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(to bottom, black 0 72%, transparent 100%);
+      }
+      .deck {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: block;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.42s var(--ease);
+      }
+      .slide.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .slide::before {
+        content: "";
+        position: absolute;
+        inset: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 42px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.42),
+          rgba(255, 255, 255, 0.1)
+        );
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      }
+      .slide::after {
+        content: "";
+        position: absolute;
+        width: 38vmax;
+        height: 38vmax;
+        border-radius: 50%;
+        right: -14vmax;
+        bottom: -18vmax;
+        background: radial-gradient(
+          circle,
+          rgba(59, 110, 168, 0.15),
+          transparent 68%
+        );
+      }
+      .slide:nth-child(3n)::after {
+        background: radial-gradient(
+          circle,
+          rgba(78, 154, 105, 0.18),
+          transparent 68%
+        );
+        left: -16vmax;
+        right: auto;
+      }
+      .slide:nth-child(4n)::after {
+        background: radial-gradient(
+          circle,
+          rgba(255, 177, 153, 0.2),
+          transparent 68%
+        );
+      }
+      .stage {
+        --scale: 1;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(1180px, calc(100vw - 84px));
+        transform: translate(-50%, -50%) scale(var(--scale));
+        transform-origin: center center;
+        z-index: 2;
+      }
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--line);
+        color: #2f6f62;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+      }
+      .kicker.dark {
+        background: rgba(23, 34, 53, 0.12);
+        color: #184b5a;
+        border-color: rgba(23, 34, 53, 0.16);
+      }
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        color: var(--ink);
+        letter-spacing: -0.035em;
+        text-wrap: balance;
+      }
+      h1 {
+        font-size: 76px;
+        line-height: 0.93;
+        font-weight: 920;
+        max-width: 920px;
+        margin-top: 22px;
+      }
+      h2 {
+        font-size: 55px;
+        line-height: 0.98;
+        font-weight: 910;
+        margin-top: 18px;
+        max-width: 980px;
+      }
+      h3 {
+        font-size: 24px;
+        line-height: 1.12;
+        font-weight: 880;
+        margin-bottom: 9px;
+      }
+      .lead {
+        font-size: 24px;
+        line-height: 1.34;
+        font-weight: 650;
+        color: #30485e;
+        max-width: 960px;
+        margin-top: 20px;
+        text-wrap: balance;
+      }
+      .sublead {
+        font-size: 18px;
+        line-height: 1.48;
+        color: #40576c;
+        max-width: 900px;
+        margin-top: 14px;
+      }
+      .grid {
+        display: grid;
+        gap: 18px;
+        margin-top: 26px;
+      }
+      .two {
+        grid-template-columns: 1.03fr 0.97fr;
+        align-items: stretch;
+      }
+      .three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .four {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .five {
+        grid-template-columns: repeat(5, 1fr);
+      }
+      .card,
+      .quote,
+      .panel,
+      .stat,
+      .rule,
+      .mini,
+      .warning,
+      .softbox {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(15px);
+      }
+      .card,
+      .panel,
+      .quote,
+      .warning,
+      .softbox {
+        padding: 24px;
+      }
+      .card.compact {
+        padding: 19px;
+        border-radius: 24px;
+      }
+      .card h3,
+      .panel h3,
+      .warning h3,
+      .softbox h3 {
+        font-size: 22px;
+      }
+      .card p,
+      .panel p,
+      .warning p,
+      .softbox p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #334a60;
+      }
+      .card ul,
+      .panel ul,
+      .warning ul,
+      .softbox ul {
+        padding-left: 20px;
+        margin-top: 8px;
+      }
+      .card li,
+      .panel li,
+      .warning li,
+      .softbox li {
+        font-size: 18px;
+        line-height: 1.44;
+        margin: 7px 0;
+        color: #334a60;
+      }
+      .emph {
+        color: #1e6b83;
+        font-weight: 880;
+      }
+      .small {
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--muted);
+      }
+      .bigline {
+        font-size: 32px;
+        line-height: 1.2;
+        font-weight: 900;
+        color: var(--ink);
+        letter-spacing: -0.03em;
+      }
+      .quote {
+        font-size: 27px;
+        line-height: 1.25;
+        font-weight: 900;
+        color: var(--ink);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(223, 245, 231, 0.7)
+        );
+      }
+      .quote span {
+        display: block;
+        margin-top: 12px;
+        font-size: 16px;
+        font-weight: 650;
+        color: #486073;
+        line-height: 1.45;
+      }
+      .stat {
+        padding: 20px;
+        border-radius: 26px;
+        min-height: 148px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.76);
+      }
+      .stat::after {
+        content: "";
+        position: absolute;
+        inset: auto -34px -38px auto;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: var(--tone, rgba(59, 110, 168, 0.16));
+      }
+      .value {
+        font-size: 56px;
+        line-height: 0.88;
+        font-weight: 1000;
+        color: var(--ink);
+        letter-spacing: -0.06em;
+        font-variant-numeric: tabular-nums;
+      }
+      .value small {
+        font-size: 31px;
+      }
+      .stat p {
+        font-size: 17.5px;
+        line-height: 1.38;
+        font-weight: 720;
+        color: #395066;
+        position: relative;
+        z-index: 1;
+      }
+      .tagrow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .tag {
+        padding: 10px 13px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--line);
+        font-size: 15px;
+        font-weight: 850;
+        color: #273a50;
+      }
+      .punch {
+        display: grid;
+        grid-template-columns: 78px 1fr;
+        gap: 18px;
+        align-items: center;
+        padding: 20px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 50px rgba(37, 55, 79, 0.1);
+      }
+      .punch .icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 24px;
+        display: grid;
+        place-items: center;
+        color: #163247;
+        font-size: 34px;
+        font-weight: 1000;
+        background: linear-gradient(135deg, var(--gold), var(--mint));
+        box-shadow: 0 16px 38px rgba(37, 55, 79, 0.14);
+      }
+      .punch h3 {
+        margin-bottom: 5px;
+      }
+      .punch p {
+        font-size: 18px;
+        line-height: 1.44;
+        color: #364d62;
+      }
+      .rule {
+        padding: 18px;
+        border-radius: 23px;
+        min-height: 150px;
+        background: rgba(255, 255, 255, 0.77);
+      }
+      .rule b {
+        display: block;
+        color: var(--ink);
+        font-size: 18px;
+        margin-bottom: 7px;
+      }
+      .rule p {
+        font-size: 17.6px;
+        line-height: 1.42;
+        color: #3b5065;
+      }
+      .ribbon {
+        margin-top: 22px;
+        padding: 18px 22px;
+        border-radius: 25px;
+        background: linear-gradient(
+          135deg,
+          rgba(46, 138, 130, 0.15),
+          rgba(255, 211, 117, 0.3)
+        );
+        border: 1px solid rgba(46, 138, 130, 0.22);
+        font-size: 21px;
+        line-height: 1.4;
+        font-weight: 760;
+        color: #21394d;
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 24px;
+      }
+      .step {
+        position: relative;
+        padding: 20px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 48px rgba(37, 55, 79, 0.1);
+      }
+      .step .num {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--ink);
+        color: white;
+        font-weight: 950;
+        margin-bottom: 14px;
+      }
+      .step h3 {
+        font-size: 20px;
+      }
+      .step p {
+        font-size: 17.6px;
+        line-height: 1.44;
+        color: #394f64;
+      }
+      .bars {
+        display: grid;
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .bar {
+        display: grid;
+        grid-template-columns: 230px 1fr 64px;
+        gap: 13px;
+        align-items: center;
+        padding: 13px 15px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+      }
+      .bar label {
+        font-size: 17px;
+        font-weight: 820;
+        color: #273c51;
+        line-height: 1.24;
+      }
+      .track {
+        height: 15px;
+        border-radius: 999px;
+        background: rgba(23, 34, 53, 0.12);
+        overflow: hidden;
+      }
+      .fill {
+        height: 100%;
+        width: var(--w);
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--blue), var(--teal));
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: transform 1s var(--ease) 0.2s;
+      }
+      .active .fill {
+        transform: scaleX(1);
+      }
+      .bar strong {
+        text-align: right;
+        font-size: 22px;
+        color: var(--ink);
+        font-weight: 1000;
+      }
+      .vs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 24px;
+      }
+      .vsbox {
+        padding: 22px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 52px rgba(37, 55, 79, 0.1);
+      }
+      .vsbox.bad {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.78),
+          rgba(217, 106, 101, 0.12)
+        );
+      }
+      .vsbox.good {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(78, 154, 105, 0.15)
+        );
+      }
+      .vsbox .label {
+        font-size: 13px;
+        font-weight: 950;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #607386;
+        margin-bottom: 12px;
+      }
+      .vsbox q {
+        display: block;
+        font-size: 24px;
+        line-height: 1.25;
+        font-weight: 900;
+        color: var(--ink);
+        quotes: "„" "”";
+      }
+      .vsbox p {
+        font-size: 16px;
+        line-height: 1.42;
+        margin-top: 12px;
+        color: #3c5368;
+      }
+      .footerline {
+        position: fixed;
+        left: 36px;
+        right: 36px;
+        bottom: 24px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        color: #465b6e;
+        font-size: 14px;
+        font-weight: 800;
+        pointer-events: none;
+      }
+      .counter {
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--line);
+      }
+      .progress {
+        position: fixed;
+        left: 34px;
+        right: 34px;
+        top: 22px;
+        height: 7px;
+        border-radius: 999px;
+        background: rgba(23, 34, 53, 0.1);
+        z-index: 12;
+        overflow: hidden;
+      }
+      .progress span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          var(--blue),
+          var(--teal),
+          var(--gold),
+          var(--coral)
+        );
+        transition: width 0.35s var(--ease);
+      }
+      .dots {
+        position: fixed;
+        top: 39px;
+        right: 38px;
+        display: flex;
+        gap: 5px;
+        z-index: 12;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(23, 34, 53, 0.18);
+      }
+      .dot.active {
+        background: #172235;
+        transform: scale(1.35);
+      }
+      .logo {
+        position: fixed;
+        left: 38px;
+        top: 38px;
+        z-index: 12;
+        font-size: 13px;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #34495f;
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+      }
+      .heroLayout {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .orbit {
+        height: 438px;
+        border-radius: 38px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.44),
+          rgba(255, 255, 255, 0.18)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.66);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .orbit::before {
+        content: "";
+        position: absolute;
+        inset: 42px;
+        border-radius: 50%;
+        border: 2px dashed rgba(23, 34, 53, 0.16);
+      }
+      .orbit::after {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 44px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-7deg);
+        background: linear-gradient(160deg, #172235, #2f608e);
+        box-shadow: 0 28px 65px rgba(23, 34, 53, 0.24);
+      }
+      .bubble {
+        position: absolute;
+        border-radius: 999px;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(23, 34, 53, 0.12);
+        box-shadow: 0 16px 44px rgba(37, 55, 79, 0.12);
+        font-weight: 900;
+        color: #21364b;
+      }
+      .b1 {
+        left: 38px;
+        top: 54px;
+      }
+      .b2 {
+        right: 46px;
+        top: 85px;
+      }
+      .b3 {
+        left: 46px;
+        bottom: 66px;
+      }
+      .b4 {
+        right: 34px;
+        bottom: 64px;
+      }
+      .b5 {
+        left: 50%;
+        top: 20px;
+        transform: translateX(-50%);
+      }
+      .centerText {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        color: white;
+        font-size: 42px;
+        font-weight: 1000;
+      }
+      .matrix {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 24px;
+      }
+      .matrix .cell {
+        padding: 20px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 44px rgba(37, 55, 79, 0.1);
+      }
+      .cell h3 {
+        font-size: 21px;
+      }
+      .cell p {
+        font-size: 18px;
+        line-height: 1.44;
+        color: #394f64;
+      }
+      .final h2 {
+        font-size: 66px;
+        max-width: 1100px;
+      }
+      .final .quote {
+        font-size: 30px;
+      }
+
+      /* Grafikonos százalékos dia */
+      .chartBoard {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 18px;
+        margin-top: 22px;
+        align-items: stretch;
+      }
+      .chartCard {
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: 0 20px 60px rgba(37, 55, 79, 0.12);
+        padding: 20px;
+        overflow: hidden;
+      }
+      .chartCard h3 {
+        font-size: 21px;
+        margin: 0 0 6px;
+        color: var(--ink);
+      }
+      .chartCard p {
+        font-size: 17.5px;
+        line-height: 1.42;
+        color: #41576b;
+        margin: 0 0 14px;
+      }
+      .compareChart {
+        display: grid;
+        gap: 13px;
+        margin-top: 10px;
+      }
+      .crow {
+        display: grid;
+        grid-template-columns: 170px 1fr 74px;
+        gap: 12px;
+        align-items: center;
+      }
+      .crow label {
+        font-size: 16.8px;
+        line-height: 1.24;
+        font-weight: 870;
+        color: #25394e;
+      }
+      .ctrack {
+        height: 18px;
+        border-radius: 999px;
+        background: rgba(23, 34, 53, 0.11);
+        overflow: hidden;
+        position: relative;
+      }
+      .cfill {
+        height: 100%;
+        width: var(--w);
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--blue), var(--teal));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 1.05s var(--ease) 0.18s;
+      }
+      .cfill.green {
+        background: linear-gradient(90deg, var(--teal), var(--green));
+      }
+      .cfill.red {
+        background: linear-gradient(90deg, var(--red), var(--coral));
+      }
+      .cfill.gold {
+        background: linear-gradient(90deg, var(--gold), var(--coral));
+      }
+      .cfill.plum {
+        background: linear-gradient(90deg, var(--plum), var(--blue));
+      }
+      .active .cfill {
+        transform: scaleX(1);
+      }
+      .crow strong {
+        position: relative;
+        z-index: 2;
+        font-size: 19px;
+        font-weight: 1000;
+        color: var(--ink);
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .miniCharts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .donutCard {
+        position: relative;
+        min-height: 154px;
+        border-radius: 25px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.64);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 14px;
+        align-items: center;
+      }
+      .donut {
+        width: 86px;
+        height: 86px;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--c, var(--teal)) calc(var(--p) * 1%),
+          rgba(23, 34, 53, 0.1) 0
+        );
+        display: grid;
+        place-items: center;
+        box-shadow: inset 0 0 0 13px rgba(255, 255, 255, 0.86);
+        font-size: 23px;
+        font-weight: 1000;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+      .donutText b {
+        display: block;
+        font-size: 16.5px;
+        line-height: 1.18;
+        color: var(--ink);
+        margin-bottom: 6px;
+      }
+      .donutText span {
+        font-size: 16.4px;
+        line-height: 1.32;
+        color: #40566a;
+        display: block;
+      }
+      .takeawayGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .takeawayBox {
+        padding: 15px;
+        border-radius: 22px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.72),
+          rgba(223, 245, 231, 0.64)
+        );
+        border: 1px solid rgba(23, 34, 53, 0.1);
+      }
+      .takeawayBox b {
+        display: block;
+        font-size: 16.8px;
+        color: var(--ink);
+        margin-bottom: 4px;
+      }
+      .takeawayBox span {
+        font-size: 15.8px;
+        line-height: 1.3;
+        color: #445b70;
+      }
+      @media (max-width: 1100px) {
+        .chartBoard,
+        .miniCharts,
+        .takeawayGrid {
+          grid-template-columns: 1fr;
+        }
+        .crow {
+          grid-template-columns: 130px 1fr 56px;
+        }
+        .donutCard {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 1100px) {
+        h1 {
+          font-size: 62px;
+        }
+        h2 {
+          font-size: 45px;
+        }
+        .lead {
+          font-size: 21px;
+        }
+        .three,
+        .four,
+        .five,
+        .timeline {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .heroLayout,
+        .two {
+          grid-template-columns: 1fr;
+        }
+        .orbit {
+          display: none;
+        }
+        .stage {
+          width: calc(100vw - 62px);
+        }
+        .bar {
+          grid-template-columns: 190px 1fr 58px;
+        }
+        .slide::before {
+          inset: 14px;
+        }
+        .logo,
+        .dots {
+          display: none;
+        }
+      }
+
+      .platformLine {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .platformPill {
+        padding: 10px 13px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 30px rgba(37, 55, 79, 0.08);
+        font-size: 16px;
+        font-weight: 900;
+        color: #23384d;
+      }
+      .localNote {
+        margin-top: 18px;
+        padding: 15px 18px;
+        border-radius: 22px;
+        background: linear-gradient(
+          135deg,
+          rgba(203, 238, 243, 0.56),
+          rgba(255, 211, 117, 0.24)
+        );
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        font-size: 18px;
+        line-height: 1.42;
+        color: #30465a;
+        font-weight: 720;
+      }
+      .dataMini {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .dataMini .miniBox {
+        padding: 15px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 15px 40px rgba(37, 55, 79, 0.09);
+      }
+      .dataMini .miniBox b {
+        display: block;
+        font-size: 25px;
+        line-height: 1;
+        font-weight: 1000;
+        color: var(--ink);
+        letter-spacing: -0.04em;
+        margin-bottom: 7px;
+      }
+      .dataMini .miniBox span {
+        display: block;
+        font-size: 15.5px;
+        line-height: 1.3;
+        color: #42586c;
+        font-weight: 720;
+      }
+      .caseGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 22px;
+      }
+      .caseBox {
+        padding: 20px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 48px rgba(37, 55, 79, 0.1);
+      }
+      .caseBox h3 {
+        font-size: 21px;
+        margin-bottom: 8px;
+      }
+      .caseBox p,
+      .caseBox li {
+        font-size: 17.8px;
+        line-height: 1.42;
+        color: #394f64;
+      }
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 13px;
+        margin-top: 22px;
+      }
+      .flowItem {
+        position: relative;
+        padding: 17px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.77);
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 42px rgba(37, 55, 79, 0.09);
+      }
+      .flowItem b {
+        display: block;
+        color: var(--ink);
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .flowItem span {
+        font-size: 16.4px;
+        line-height: 1.32;
+        color: #40566a;
+        display: block;
+      }
+      .sourceNote {
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 1.38;
+        color: #657484;
+      }
+      .warningSoft {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 177, 153, 0.18)
+        );
+        border: 1px solid rgba(217, 106, 101, 0.18);
+      }
+      .goodSoft {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(223, 245, 231, 0.7)
+        );
+        border: 1px solid rgba(78, 154, 105, 0.18);
+      }
+      .compactList li {
+        font-size: 17px !important;
+        line-height: 1.36 !important;
+        margin: 5px 0 !important;
+      }
+      @media (max-width: 1100px) {
+        .dataMini,
+        .flow {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .caseGrid {
+          grid-template-columns: 1fr;
+        }
+        .platformPill {
+          font-size: 14px;
+        }
+      }
+
+      /* === 2026-05 projector stability patch: no more cropped/overlapping slides === */
+      .stage {
+        width: min(1120px, calc(100vw - 104px));
+      }
+      h1 {
+        font-size: clamp(57px, 5.35vw, 74px);
+        line-height: 0.94;
+        margin-top: 16px;
+      }
+      h2 {
+        font-size: clamp(38px, 4.18vw, 51px);
+        line-height: 1;
+        margin-top: 13px;
+        max-width: 1050px;
+      }
+      h3 {
+        font-size: clamp(18px, 1.7vw, 22px);
+        line-height: 1.12;
+        margin-bottom: 7px;
+      }
+      .lead {
+        font-size: clamp(20px, 1.72vw, 23px);
+        line-height: 1.34;
+        margin-top: 12px;
+        max-width: 1050px;
+      }
+      .sublead {
+        font-size: 20px;
+        line-height: 1.42;
+        margin-top: 8px;
+      }
+      .grid {
+        gap: 11px;
+        margin-top: 15px;
+      }
+      .tagrow {
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .tag {
+        padding: 8px 11px;
+        font-size: 13.5px;
+      }
+      .card,
+      .panel,
+      .quote,
+      .warning,
+      .softbox {
+        padding: 14px 15px;
+        border-radius: 23px;
+      }
+      .card h3,
+      .panel h3,
+      .warning h3,
+      .softbox h3 {
+        font-size: 19.5px;
+      }
+      .card p,
+      .panel p,
+      .warning p,
+      .softbox p {
+        font-size: 19px;
+        line-height: 1.42;
+      }
+      .card ul,
+      .panel ul,
+      .warning ul,
+      .softbox ul {
+        padding-left: 17px;
+        margin-top: 6px;
+      }
+      .card li,
+      .panel li,
+      .warning li,
+      .softbox li {
+        font-size: 18.8px;
+        line-height: 1.38;
+        margin: 4px 0;
+      }
+      .rule {
+        padding: 11px 12px;
+        border-radius: 20px;
+        min-height: 108px;
+      }
+      .rule b {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+      .rule p {
+        font-size: 18px;
+        line-height: 1.36;
+      }
+      .punch {
+        grid-template-columns: 54px 1fr;
+        gap: 11px;
+        padding: 14px;
+        border-radius: 22px;
+      }
+      .punch .icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        font-size: 26px;
+      }
+      .punch p {
+        font-size: 18.8px;
+        line-height: 1.37;
+      }
+      .ribbon {
+        margin-top: 13px;
+        padding: 10px 13px;
+        border-radius: 20px;
+        font-size: 20px;
+        line-height: 1.35;
+      }
+      .quote {
+        margin-top: 14px;
+        font-size: clamp(20px, 1.9vw, 25px);
+        line-height: 1.2;
+      }
+      .quote span {
+        font-size: 18px;
+        line-height: 1.38;
+        margin-top: 7px;
+      }
+      .timeline {
+        gap: 8px;
+        margin-top: 13px;
+      }
+      .step {
+        padding: 10px;
+        border-radius: 21px;
+      }
+      .step .num {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      .step h3 {
+        font-size: 18px;
+      }
+      .step p {
+        font-size: 18px;
+        line-height: 1.36;
+      }
+      .vs {
+        gap: 11px;
+        margin-top: 15px;
+      }
+      .vsbox {
+        padding: 14px;
+        border-radius: 22px;
+      }
+      .vsbox q {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+      .vsbox p {
+        font-size: 18px;
+        line-height: 1.37;
+        margin-top: 8px;
+      }
+      .vsbox .label {
+        font-size: 12.8px;
+        margin-bottom: 8px;
+      }
+      .matrix {
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .matrix .cell {
+        padding: 13px;
+        border-radius: 20px;
+      }
+      .cell h3 {
+        font-size: 18px;
+      }
+      .cell p {
+        font-size: 18.5px;
+        line-height: 1.37;
+      }
+      .stat {
+        padding: 14px;
+        border-radius: 22px;
+        min-height: 116px;
+      }
+      .value {
+        font-size: clamp(38px, 3.7vw, 52px);
+      }
+      .value small {
+        font-size: 26px;
+      }
+      .stat p {
+        font-size: 17.6px;
+        line-height: 1.32;
+      }
+      .chartBoard {
+        gap: 9px;
+        margin-top: 13px;
+      }
+      .chartCard {
+        padding: 13px;
+        border-radius: 22px;
+      }
+      .chartCard.zoomable {
+        padding-right: 46px;
+      }
+      .chartCard h3 {
+        font-size: 18px;
+      }
+      .chartCard p {
+        font-size: 17.6px;
+        line-height: 1.34;
+        margin-bottom: 8px;
+      }
+      .compareChart {
+        gap: 7px;
+      }
+      .crow {
+        grid-template-columns: 178px 1fr 72px;
+        gap: 8px;
+      }
+      .crow label {
+        font-size: 17.2px;
+      }
+      .ctrack {
+        height: 16px;
+      }
+      .crow strong {
+        font-size: 17px;
+      }
+      .miniCharts {
+        gap: 8px;
+      }
+      .donutCard {
+        min-height: 110px;
+        padding: 11px;
+        border-radius: 19px;
+        grid-template-columns: 64px 1fr;
+      }
+      .donut {
+        width: 62px;
+        height: 62px;
+        box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.86);
+        font-size: 17px;
+      }
+      .donutText b {
+        font-size: 18px;
+      }
+      .donutText span {
+        font-size: 16px;
+        line-height: 1.28;
+      }
+      .takeawayGrid {
+        gap: 7px;
+        margin-top: 8px;
+      }
+      .takeawayBox {
+        padding: 9px;
+        border-radius: 18px;
+      }
+      .takeawayBox b {
+        font-size: 16px;
+      }
+      .takeawayBox span {
+        font-size: 15.8px;
+        line-height: 1.26;
+      }
+      .platformLine {
+        gap: 7px;
+        margin-top: 12px;
+      }
+      .platformPill {
+        padding: 8px 11px;
+        font-size: 15.8px;
+      }
+      .localNote {
+        margin-top: 12px;
+        padding: 11px 14px;
+        font-size: 18px;
+        line-height: 1.36;
+      }
+      .dataMini {
+        gap: 8px;
+        margin-top: 11px;
+      }
+      .dataMini .miniBox {
+        padding: 10px;
+        border-radius: 17px;
+      }
+      .dataMini .miniBox b {
+        font-size: 22px;
+      }
+      .dataMini .miniBox span {
+        font-size: 16px;
+        line-height: 1.26;
+      }
+      .caseGrid {
+        gap: 11px;
+        margin-top: 14px;
+      }
+      .caseBox {
+        padding: 13px;
+        border-radius: 21px;
+      }
+      .caseBox h3 {
+        font-size: 18px;
+      }
+      .caseBox p,
+      .caseBox li {
+        font-size: 17.4px;
+        line-height: 1.35;
+      }
+      .flow {
+        gap: 7px;
+        margin-top: 13px;
+      }
+      .flowItem {
+        padding: 10px;
+        border-radius: 18px;
+      }
+      .flowItem b {
+        font-size: 15.5px;
+      }
+      .flowItem span {
+        font-size: 16px;
+        line-height: 1.26;
+      }
+      .sourceNote {
+        margin-top: 7px;
+        font-size: 14px;
+        line-height: 1.32;
+        color: #68798a;
+      }
+      .bigAlert {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .bigAlert .alertMetric {
+        padding: 15px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(23, 34, 53, 0.12);
+        box-shadow: 0 16px 44px rgba(37, 55, 79, 0.1);
+      }
+      .alertMetric b {
+        display: block;
+        font-size: clamp(32px, 3.1vw, 46px);
+        line-height: 0.9;
+        color: var(--ink);
+        letter-spacing: -0.05em;
+      }
+      .alertMetric span {
+        display: block;
+        margin-top: 8px;
+        font-size: 13.2px;
+        line-height: 1.23;
+        color: #40566a;
+        font-weight: 720;
+      }
+      .alertMetric.red {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.82),
+          rgba(217, 106, 101, 0.14)
+        );
+      }
+      .alertMetric.gold {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.82),
+          rgba(255, 211, 117, 0.24)
+        );
+      }
+      .alertMetric.blue {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.82),
+          rgba(203, 238, 243, 0.54)
+        );
+      }
+      .whoNote {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 18px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.84),
+          rgba(255, 211, 117, 0.16)
+        );
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        font-size: 16px;
+        line-height: 1.32;
+        color: #31475c;
+      }
+      .whoNote b {
+        color: var(--ink);
+      }
+      .addictionGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .signalCard {
+        padding: 12px 13px;
+        border-radius: 20px;
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 16px 42px rgba(37, 55, 79, 0.09);
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .signalCard.warm {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.84),
+          rgba(255, 177, 153, 0.18)
+        );
+      }
+      .signalCard.cool {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.84),
+          rgba(203, 238, 243, 0.42)
+        );
+      }
+      .signalCard b {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--ink);
+        font-size: 17px;
+      }
+      .signalCard p {
+        font-size: 16px;
+        line-height: 1.34;
+        color: #394f64;
+      }
+      .whyHardGrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .whyCard {
+        padding: 15px 16px;
+        border-radius: 24px;
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 18px 46px rgba(37, 55, 79, 0.1);
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .whyCard.warm {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.84),
+          rgba(255, 211, 117, 0.18)
+        );
+      }
+      .whyCard.cool {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.84),
+          rgba(203, 238, 243, 0.46)
+        );
+      }
+      .whyCard.green {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.84),
+          rgba(223, 245, 231, 0.62)
+        );
+      }
+      .whyCard .cardNum {
+        display: inline-grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: white;
+        font-size: 14px;
+        font-weight: 950;
+        margin-bottom: 10px;
+      }
+      .whyCard h3 {
+        font-size: 21px;
+        margin-bottom: 7px;
+      }
+      .whyCard p {
+        font-size: 16px;
+        line-height: 1.34;
+        color: #3b5065;
+      }
+      .pillRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .dataPill {
+        padding: 8px 11px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 10px 24px rgba(37, 55, 79, 0.08);
+        font-size: 13.2px;
+        line-height: 1.18;
+        color: #30465a;
+        font-weight: 820;
+      }
+      .dataPill b {
+        color: var(--ink);
+        font-size: 15px;
+      }
+      .miniHighlight {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(23, 34, 53, 0.08);
+        font-size: 14.4px;
+        line-height: 1.28;
+        color: #385066;
+        font-weight: 760;
+      }
+      .microGrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .microCard {
+        padding: 11px 12px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 12px 30px rgba(37, 55, 79, 0.08);
+      }
+      .microCard b {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--ink);
+        font-size: 15.5px;
+      }
+      .microCard p {
+        font-size: 14.3px;
+        line-height: 1.24;
+        color: #3e556a;
+      }
+      .practicalGrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .practicalCard {
+        padding: 14px 15px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 16px 42px rgba(37, 55, 79, 0.09);
+      }
+      .practicalCard b {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--ink);
+        font-size: 18px;
+      }
+      .practicalCard p {
+        font-size: 15.6px;
+        line-height: 1.32;
+        color: #3b5065;
+      }
+      .homeMinGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .homeMinCard {
+        padding: 14px 15px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        box-shadow: 0 14px 34px rgba(37, 55, 79, 0.08);
+      }
+      .homeMinCard b {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+        font-size: 17px;
+      }
+      .homeMinCard p {
+        font-size: 15.2px;
+        line-height: 1.3;
+        color: #3b5065;
+      }
+      .homeMinNote {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.64);
+        border: 1px solid rgba(23, 34, 53, 0.08);
+        font-size: 14.8px;
+        line-height: 1.28;
+        color: #385066;
+      }
+      .minimumRow {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .minimumPill {
+        padding: 9px 11px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(23, 34, 53, 0.08);
+        font-size: 13.8px;
+        line-height: 1.22;
+        color: #355066;
+        font-weight: 760;
+      }
+      .localDataSlide .grid.three {
+        gap: 10px;
+      }
+      .localDataSlide .stat {
+        padding: 17px 16px 18px;
+        min-height: 124px;
+      }
+      .localDataSlide .value {
+        margin-bottom: 16px;
+        line-height: 0.94;
+      }
+      .localDataSlide .stat p {
+        padding-top: 2px;
+        font-size: 15px;
+        line-height: 1.28;
+      }
+      .localDataSlide .stat .value small {
+        font-size: 0.52em;
+      }
+      .ageNote {
+        margin-top: 9px;
+        padding: 10px 12px;
+        border-radius: 17px;
+        background: linear-gradient(
+          135deg,
+          rgba(223, 245, 231, 0.78),
+          rgba(255, 255, 255, 0.8)
+        );
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        font-size: 15.5px;
+        line-height: 1.3;
+        color: #355066;
+      }
+      .tightNote {
+        margin-top: 12px;
+        padding: 12px 15px;
+        border-radius: 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(223, 245, 231, 0.72),
+          rgba(255, 255, 255, 0.75)
+        );
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        font-size: 15px;
+        line-height: 1.28;
+        font-weight: 800;
+        color: #20374c;
+      }
+      .final h2 {
+        font-size: clamp(42px, 4.3vw, 56px);
+      }
+      .final .quote {
+        font-size: clamp(22px, 2.1vw, 28px);
+      }
+      @media (max-width: 1100px) {
+        .microGrid,
+        .practicalGrid,
+        .homeMinGrid,
+        .minimumRow {
+          grid-template-columns: 1fr;
+        }
+        .whyHardGrid {
+          grid-template-columns: 1fr;
+        }
+        .bigAlert {
+          grid-template-columns: 1fr;
+        }
+        .addictionGrid {
+          grid-template-columns: 1fr;
+        }
+        .four,
+        .five,
+        .timeline {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .stat,
+      .chartCard,
+      .donutCard,
+      .takeawayBox[data-zoomable-stat="true"],
+      .compareChart,
+      .crow {
+        transition:
+          transform 0.24s var(--ease),
+          box-shadow 0.24s var(--ease),
+          border-color 0.24s var(--ease);
+      }
+      .zoomable {
+        cursor: pointer;
+        position: relative;
+      }
+      .zoomable:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 22px 58px rgba(37, 55, 79, 0.14);
+        border-color: rgba(59, 110, 168, 0.24);
+      }
+      .zoomable:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(59, 110, 168, 0.18),
+          0 22px 58px rgba(37, 55, 79, 0.14);
+        border-color: rgba(59, 110, 168, 0.28);
+      }
+      .zoomable::after {
+        content: "\2197";
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(23, 34, 53, 0.1);
+        color: #486073;
+        font-size: 13px;
+        font-weight: 900;
+        box-shadow: 0 8px 22px rgba(37, 55, 79, 0.1);
+        opacity: 0.78;
+      }
+      .chartCard.zoomable {
+        padding-right: 50px;
+      }
+      .chartCard.zoomable::after {
+        width: 20px;
+        height: 20px;
+        top: 12px;
+        right: 12px;
+        font-size: 11px;
+      }
+      .takeawayBox.zoomable::after,
+      .donutCard.zoomable::after {
+        width: 20px;
+        height: 20px;
+        top: 10px;
+        right: 10px;
+        font-size: 11px;
+      }
+      .crow.zoomable::after,
+      .compareChart.zoomable::after {
+        content: none;
+      }
+      body.modal-open {
+        overflow: hidden;
+      }
+      body.modal-open .deck,
+      body.modal-open .footerline {
+        pointer-events: none;
+      }
+      .zoomOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        background: rgba(12, 19, 31, 0.22);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transition:
+          opacity 0.18s ease,
+          visibility 0.18s ease;
+      }
+      .zoomOverlay.open {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+      }
+      .zoomDialog {
+        position: relative;
+        width: min(1080px, calc(100vw - 56px));
+        max-height: 84vh;
+        overflow: auto;
+        border-radius: 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.94),
+          rgba(247, 251, 255, 0.88)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        box-shadow: 0 40px 120px rgba(15, 24, 39, 0.24);
+        padding: 34px 34px 30px;
+        color: var(--text);
+        transform: scale(0.96) translateY(10px);
+        opacity: 0;
+        transition:
+          transform 0.22s var(--ease),
+          opacity 0.18s ease;
+      }
+      .zoomOverlay.open .zoomDialog {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+      .zoomClose {
+        position: sticky;
+        top: 0;
+        margin-left: auto;
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(23, 34, 53, 0.08);
+        color: var(--ink);
+        font-size: 32px;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(37, 55, 79, 0.1);
+        z-index: 2;
+      }
+      .zoomClose:hover,
+      .zoomClose:focus-visible {
+        background: rgba(23, 34, 53, 0.14);
+        outline: none;
+      }
+      .zoomContent {
+        margin-top: 10px;
+      }
+      .zoomContent > * {
+        width: 100% !important;
+        max-width: none !important;
+        min-height: 0 !important;
+        transform: none !important;
+      }
+      .zoomContent .stat,
+      .zoomContent .chartCard,
+      .zoomContent .donutCard,
+      .zoomContent .takeawayBox,
+      .zoomContent .compareChart,
+      .zoomContent .crow {
+        cursor: default;
+        box-shadow: none;
+      }
+      .zoomContent .zoomable::after {
+        display: none;
+      }
+      .zoomContent .compareChart {
+        gap: 16px;
+      }
+      .zoomContent .crow {
+        grid-template-columns: 260px 1fr 90px !important;
+        gap: 16px;
+      }
+      .zoomContent .crow label {
+        font-size: 22px;
+        line-height: 1.28;
+      }
+      .zoomContent .crow strong {
+        font-size: 28px;
+      }
+      .zoomContent .ctrack,
+      .zoomContent .track {
+        height: 24px !important;
+      }
+      .zoomContent .cfill,
+      .zoomContent .fill {
+        transform: scaleX(1) !important;
+      }
+      .zoomContent .cfill,
+      .zoomContent .fill,
+      .zoomContent .donut {
+        transition: none !important;
+      }
+      .zoomContent .bar {
+        grid-template-columns: 260px 1fr 88px;
+        gap: 16px;
+      }
+      .zoomContent .bar label {
+        font-size: 21px;
+      }
+      .zoomContent .bar strong {
+        font-size: 26px;
+      }
+      .zoomContent h3 {
+        font-size: clamp(24px, 2.3vw, 30px);
+        line-height: 1.18;
+      }
+      .zoomContent p,
+      .zoomContent li,
+      .zoomContent span,
+      .zoomContent label,
+      .zoomContent q,
+      .zoomContent b,
+      .zoomContent strong {
+        line-height: 1.55;
+      }
+      .zoomContent p,
+      .zoomContent li {
+        font-size: clamp(18px, 1.8vw, 22px);
+      }
+      .zoomContent .quote {
+        font-size: clamp(28px, 2.7vw, 36px);
+        line-height: 1.28;
+      }
+      .zoomContent .quote span {
+        font-size: clamp(17px, 1.7vw, 20px);
+      }
+      .zoomContent .value {
+        font-size: clamp(56px, 5vw, 80px);
+      }
+      .zoomContent .value small {
+        font-size: 0.58em;
+      }
+      .zoomContent .stat,
+      .zoomContent .chartCard,
+      .zoomContent .compareChart,
+      .zoomContent .crow {
+        min-height: 0;
+        padding: 0;
+      }
+      .zoomContent .stat {
+        min-height: 0;
+        padding: 22px;
+      }
+      .zoomContent .chartCard {
+        padding: 22px;
+      }
+      .zoomContent .donutCard {
+        grid-template-columns: 110px 1fr;
+        gap: 20px;
+        padding: 20px;
+      }
+      .zoomContent .donut {
+        width: 108px;
+        height: 108px;
+        box-shadow: inset 0 0 0 16px rgba(255, 255, 255, 0.9);
+        font-size: 28px;
+      }
+      .zoomContent .donutText b {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .zoomContent .donutText span {
+        font-size: 17px;
+        line-height: 1.42;
+      }
+      .zoomContent .takeawayBox {
+        padding: 18px;
+      }
+      .zoomContent .takeawayBox b {
+        font-size: 19px;
+        margin-bottom: 8px;
+      }
+      .zoomContent .takeawayBox span {
+        font-size: 17px;
+        line-height: 1.42;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .stat,
+        .chartCard,
+        .donutCard,
+        .takeawayBox[data-zoomable-stat="true"],
+        .compareChart,
+        .crow,
+        .zoomOverlay,
+        .zoomDialog {
+          transition: none !important;
+          animation: none !important;
+        }
+        .zoomable:hover {
+          transform: none;
+        }
+      }
+      .mobileNav {
+        display: none;
+      }
+      @media (max-width: 900px) {
+        html.mobile-mode,
+        body.mobile-mode {
+          width: 100%;
+          height: auto;
+          min-height: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+        body.mobile-mode {
+          overscroll-behavior-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        body.mobile-mode::before {
+          opacity: 0.16;
+          background-size: 36px 36px;
+        }
+        body.mobile-mode .deck {
+          width: 100%;
+          height: auto;
+          min-height: 100vh;
+          overflow: visible;
+          padding-bottom: 24px;
+          touch-action: pan-y;
+        }
+        body.mobile-mode .slide {
+          position: relative;
+          inset: auto;
+          display: block;
+          min-height: 0;
+          overflow: visible;
+          opacity: 1;
+          pointer-events: auto;
+          transition: none;
+          padding: 14px 0 18px;
+          touch-action: pan-y;
+        }
+        body.mobile-mode .slide::before {
+          inset: 8px 8px 12px;
+          border-radius: 28px;
+        }
+        body.mobile-mode .slide::after {
+          width: 62vw;
+          height: 62vw;
+          right: -18vw;
+          bottom: -4vw;
+          opacity: 0.6;
+        }
+        body.mobile-mode .stage {
+          position: relative;
+          left: auto;
+          top: auto;
+          width: calc(100vw - 28px);
+          max-width: none;
+          margin: 10px auto 0;
+          padding: 8px 0 18px;
+          transform: none !important;
+          transform-origin: initial;
+          touch-action: pan-y;
+        }
+        body.mobile-mode .progress,
+        body.mobile-mode .logo,
+        body.mobile-mode .dots,
+        body.mobile-mode .footerline,
+        body.mobile-mode .mobileNav {
+          display: none;
+        }
+        body.mobile-mode h1 {
+          font-size: clamp(34px, 10vw, 48px);
+          line-height: 0.98;
+          margin-top: 14px;
+        }
+        body.mobile-mode h2 {
+          font-size: clamp(28px, 8vw, 38px);
+          line-height: 1.04;
+          margin-top: 14px;
+          max-width: none;
+        }
+        body.mobile-mode h3 {
+          font-size: clamp(20px, 5.4vw, 24px);
+          line-height: 1.16;
+        }
+        body.mobile-mode .lead {
+          max-width: none;
+          font-size: clamp(18px, 4.9vw, 20px);
+          line-height: 1.42;
+          margin-top: 16px;
+          text-wrap: pretty;
+        }
+        body.mobile-mode .sublead,
+        body.mobile-mode p,
+        body.mobile-mode li,
+        body.mobile-mode .card p,
+        body.mobile-mode .panel p,
+        body.mobile-mode .warning p,
+        body.mobile-mode .softbox p,
+        body.mobile-mode .cell p,
+        body.mobile-mode .rule p,
+        body.mobile-mode .step p,
+        body.mobile-mode .caseBox p,
+        body.mobile-mode .vsbox p,
+        body.mobile-mode .sourceNote,
+        body.mobile-mode .homeMinNote,
+        body.mobile-mode .miniHighlight,
+        body.mobile-mode .tightNote,
+        body.mobile-mode .ageNote,
+        body.mobile-mode .takeawayBox span {
+          font-size: clamp(16.5px, 4.4vw, 18px);
+          line-height: 1.45;
+        }
+        body.mobile-mode .kicker {
+          font-size: 11px;
+          padding: 7px 11px;
+        }
+        body.mobile-mode .tagrow,
+        body.mobile-mode .platformLine,
+        body.mobile-mode .pillRow {
+          gap: 8px;
+          margin-top: 14px;
+        }
+        body.mobile-mode .tag,
+        body.mobile-mode .platformPill,
+        body.mobile-mode .dataPill {
+          max-width: 100%;
+          font-size: 13.5px;
+          line-height: 1.24;
+          padding: 8px 10px;
+          white-space: normal;
+        }
+        body.mobile-mode .dataPill b {
+          font-size: 15px;
+        }
+        body.mobile-mode .localNote {
+          margin-top: 14px;
+          padding: 13px 14px;
+          font-size: 16.5px;
+          line-height: 1.42;
+        }
+        body.mobile-mode .heroLayout,
+        body.mobile-mode .two,
+        body.mobile-mode .three,
+        body.mobile-mode .four,
+        body.mobile-mode .five,
+        body.mobile-mode .timeline,
+        body.mobile-mode .chartBoard,
+        body.mobile-mode .caseGrid,
+        body.mobile-mode .whyHardGrid,
+        body.mobile-mode .practicalGrid,
+        body.mobile-mode .homeMinGrid,
+        body.mobile-mode .minimumRow,
+        body.mobile-mode .microGrid,
+        body.mobile-mode .dataMini,
+        body.mobile-mode .bigAlert,
+        body.mobile-mode .addictionGrid,
+        body.mobile-mode .takeawayGrid,
+        body.mobile-mode .matrix,
+        body.mobile-mode .flow,
+        body.mobile-mode .vs {
+          grid-template-columns: 1fr !important;
+        }
+        body.mobile-mode .grid,
+        body.mobile-mode .timeline,
+        body.mobile-mode .chartBoard,
+        body.mobile-mode .caseGrid,
+        body.mobile-mode .whyHardGrid,
+        body.mobile-mode .practicalGrid,
+        body.mobile-mode .homeMinGrid,
+        body.mobile-mode .minimumRow,
+        body.mobile-mode .microGrid,
+        body.mobile-mode .dataMini,
+        body.mobile-mode .bigAlert,
+        body.mobile-mode .addictionGrid,
+        body.mobile-mode .takeawayGrid,
+        body.mobile-mode .flow,
+        body.mobile-mode .vs {
+          gap: 12px;
+        }
+        body.mobile-mode .orbit {
+          display: none;
+        }
+        body.mobile-mode .chartCard.zoomable {
+          padding-right: 18px;
+        }
+        body.mobile-mode .zoomable {
+          cursor: default;
+        }
+        body.mobile-mode .zoomable::after {
+          display: none;
+        }
+        body.mobile-mode .chartCard.zoomable::after,
+        body.mobile-mode .donutCard.zoomable::after,
+        body.mobile-mode .takeawayBox.zoomable::after {
+          top: 10px;
+          right: 10px;
+        }
+        body.mobile-mode .chartCard,
+        body.mobile-mode .donutCard,
+        body.mobile-mode .compareChart,
+        body.mobile-mode .bigAlert .alertMetric,
+        body.mobile-mode .stat,
+        body.mobile-mode .card,
+        body.mobile-mode .panel,
+        body.mobile-mode .quote,
+        body.mobile-mode .rule,
+        body.mobile-mode .step,
+        body.mobile-mode .caseBox,
+        body.mobile-mode .signalCard,
+        body.mobile-mode .whyCard,
+        body.mobile-mode .practicalCard,
+        body.mobile-mode .homeMinCard {
+          min-height: 0 !important;
+        }
+        body.mobile-mode .compareChart {
+          gap: 14px;
+        }
+        body.mobile-mode .chartCard {
+          padding: 16px 16px 14px;
+        }
+        body.mobile-mode .chartCard h3 {
+          margin-bottom: 8px;
+        }
+        body.mobile-mode .chartCard p {
+          margin-bottom: 12px;
+        }
+        body.mobile-mode .crow,
+        body.mobile-mode .bar {
+          grid-template-columns: 1fr !important;
+          gap: 8px;
+          align-items: start;
+        }
+        body.mobile-mode .crow label,
+        body.mobile-mode .bar label {
+          font-size: 17px;
+          line-height: 1.3;
+        }
+        body.mobile-mode .crow strong,
+        body.mobile-mode .bar strong {
+          font-size: 22px;
+          justify-self: start;
+          margin-top: -2px;
+        }
+        body.mobile-mode .ctrack,
+        body.mobile-mode .track {
+          width: 100%;
+          min-width: 0;
+          height: 22px;
+        }
+        body.mobile-mode .localDataSlide .stat {
+          padding: 15px 15px 16px;
+        }
+        body.mobile-mode .localDataSlide .value {
+          margin-bottom: 14px;
+        }
+        body.mobile-mode .takeawayBox {
+          padding: 14px;
+        }
+        body.mobile-mode .takeawayBox b {
+          font-size: 17px;
+          margin-bottom: 6px;
+        }
+        body.mobile-mode .bar,
+        body.mobile-mode .crow,
+        body.mobile-mode .compareChart,
+        body.mobile-mode .chartCard {
+          overflow: visible;
+        }
+        body.mobile-mode .donutCard {
+          grid-template-columns: 88px 1fr;
+          gap: 14px;
+          align-items: center;
+          padding: 14px;
+        }
+        body.mobile-mode .donut {
+          width: 84px;
+          height: 84px;
+          box-shadow: inset 0 0 0 12px rgba(255, 255, 255, 0.9);
+          font-size: 20px;
+        }
+        body.mobile-mode .donutText b {
+          font-size: 17px;
+        }
+        body.mobile-mode .donutText span {
+          font-size: 15.8px;
+          line-height: 1.34;
+        }
+        body.mobile-mode .value {
+          font-size: clamp(42px, 11vw, 54px);
+        }
+        body.mobile-mode .value small {
+          font-size: 0.56em;
+        }
+        body.mobile-mode .dataMini .miniBox b {
+          font-size: 28px;
+        }
+        body.mobile-mode .ribbon {
+          margin-top: 14px;
+          padding: 13px 15px;
+          font-size: clamp(17px, 4.6vw, 19px);
+          line-height: 1.42;
+        }
+        body.mobile-mode .bigAlert .alertMetric,
+        body.mobile-mode .caseBox,
+        body.mobile-mode .signalCard,
+        body.mobile-mode .whyCard,
+        body.mobile-mode .practicalCard,
+        body.mobile-mode .homeMinCard,
+        body.mobile-mode .panel,
+        body.mobile-mode .card,
+        body.mobile-mode .rule,
+        body.mobile-mode .step {
+          padding: 14px 15px;
+        }
+        body.mobile-mode .alertMetric b {
+          font-size: 30px;
+        }
+        body.mobile-mode .alertMetric span {
+          font-size: 15.8px;
+          line-height: 1.34;
+        }
+        body.mobile-mode .sourceNote {
+          margin-top: 12px;
+          font-size: 13.6px;
+          line-height: 1.42;
+        }
+        body.mobile-mode .tightNote,
+        body.mobile-mode .ageNote,
+        body.mobile-mode .homeMinNote {
+          padding: 11px 13px;
+        }
+        body.mobile-mode .zoomOverlay {
+          padding: 10px;
+          align-items: stretch;
+        }
+        body.mobile-mode .zoomDialog {
+          width: min(100%, calc(100vw - 20px));
+          max-height: calc(100vh - 20px);
+          border-radius: 24px;
+          padding: 18px 16px 16px;
+        }
+        body.mobile-mode .zoomClose {
+          width: 48px;
+          height: 48px;
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="deck" id="deck">
+      <div class="progress"><span id="progressBar"></span></div>
+      <div class="logo">Szülői értekezlet • 5. osztály</div>
+      <div class="dots" id="dots"></div>
+      <section class="slide active">
+        <div class="stage heroLayout">
+          <div>
+            <span class="kicker">Nyitás</span>
+            <h1>Digitális nevelés ötödik osztályban</h1>
+            <p class="lead">
+              Mit mutatnak a helyi válaszok, hol vannak rálátási rések, és
+              milyen közös kapaszkodók segíthetnek az osztályközösségben?
+            </p>
+            <div class="tagrow">
+              <span class="tag">adatok + kutatási háttér</span
+              ><span class="tag">gyakorlati családi mondatok</span>
+            </div>
+          </div>
+          <div aria-hidden="true" class="orbit">
+            <span class="bubble b5">kapcsolódás</span
+            ><span class="bubble b1">alvás</span
+            ><span class="bubble b2">játék</span
+            ><span class="bubble b3">konfliktus</span
+            ><span class="bubble b4">biztonság</span
+            ><span class="centerText">5.</span>
+          </div>
+        </div>
+      </section>
+      
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">2. Fő üzenet</span>
+          <h2>Nem a képernyő az egyetlen kérdés</h2>
+          <p class="lead">
+            A nemzetközi kutatási irány ma már óvatosabb: a „mennyi időt tölt
+            képernyő előtt?” önmagában túl durva mutató. A lényeg inkább az,
+            hogy
+            <span class="emph"
+              >mit, mikor, kivel, milyen érzelmi állapotban és milyen
+              következményekkel</span
+            >
+            használja, és ezekről milyen nyelven tudunk vele beszélgetni.
+          </p>
+          <div class="grid five">
+            <div class="rule">
+              <b>Mit?</b>
+              <p>tartalom számít</p>
+            </div>
+            <div class="rule">
+              <b>Mikor?</b>
+              <p>este más</p>
+            </div>
+            <div class="rule">
+              <b>Kivel?</b>
+              <p>kapcsolat / kockázat</p>
+            </div>
+            <div class="rule">
+              <b>Mi helyett?</b>
+              <p>alvás, mozgás, nyugalom</p>
+            </div>
+            <div class="rule">
+              <b>Tud-e szólni?</b>
+              <p>segítségkérés</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slide localDataSlide">
+        <div class="stage">
+          <span class="kicker">3. Helyi adatok</span>
+          <h2>Mást lát a szülő, mást él meg a gyerek</h2>
+          <p class="lead">
+            Az osztályszintű helyzetkép beszélgetésindító tükör. A legerősebb
+            üzenet: több ponton eltér,
+            amit a gyerekek átélnek, és amit a felnőttek észlelnek.
+          </p>
+          <div class="grid three">
+            <div class="stat" style="--tone: rgba(59, 110, 168, 0.16)">
+              <div class="value">86<small>%</small> / 40<small>%</small></div>
+              <p>
+                Szülői ránézés vs. gyerek által érzékelt odafigyelés az online
+                kapcsolatokra.
+              </p>
+            </div>
+            <div class="stat" style="--tone: rgba(217, 106, 101, 0.16)">
+              <div class="value">80<small>%</small> / 46<small>%</small></div>
+              <p>
+                Zavaró vagy ijesztő online tartalom: gyerekélmény vs. szülői
+                érzékelés.
+              </p>
+            </div>
+            <div class="stat" style="--tone: rgba(255, 177, 153, 0.22)">
+              <div class="value">73<small>%</small> / 38<small>%</small></div>
+              <p>
+                Online konfliktus átkerült az osztályba: gyerekek jelzése vs.
+                szülői rálátás.
+              </p>
+            </div>
+            <div class="stat" style="--tone: rgba(78, 154, 105, 0.18)">
+              <div class="value">60<small>%</small></div>
+              <p>
+                A gyerekek szerint online is tartják a kapcsolatot a
+                barátaikkal.
+              </p>
+            </div>
+            <div class="stat" style="--tone: rgba(109, 90, 167, 0.17)">
+              <div class="value">29<small>%</small> / 62<small>%</small></div>
+              <p>
+                Nehéz abbahagyni: a gyerekek kevésbé látják problémának, mint a
+                szülők.
+              </p>
+            </div>
+            <div class="stat" style="--tone: rgba(255, 211, 117, 0.28)">
+              <div class="value">47<small>%</small> / 23<small>%</small></div>
+              <p>
+                Áthívás másik platformra, privát beszélgetésbe vagy zárt
+                csoportba.
+              </p>
+            </div>
+          </div>
+          <div class="localNote">
+            A helyi adatok fő tanulsága: nem az a kérdés, „ki látja jól”, hanem
+            hogy hol lehet rálátási rés a felnőtt nézőpont és a gyerekélmény
+            között.
+          </div>
+        </div>
+      </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">3b. Grafikonok</span>
+          <h2>Százalékok képen: hol lehet eltérés a felnőtt rálátás és a gyerekélmény között?</h2>
+          <p class="lead">
+            A cél itt is inkább a beszélgetési fókusz kijelölése.
+          </p>
+          <div class="chartBoard">
+            <div class="chartCard">
+              <h3>Szülői érzékelés és gyerekélmény</h3>
+              <p>
+                A felnőtt figyelem akkor válik védő tényezővé, ha a gyerek is
+                megélt biztonságként érzékeli.
+              </p>
+              <div class="compareChart">
+                <div class="crow">
+                  <label>Szülő szerint ránéz</label>
+                  <div class="ctrack">
+                    <div class="cfill" style="--w: 86%"></div>
+                  </div>
+                  <strong>86%</strong>
+                </div>
+                <div class="crow">
+                  <label>Gyerek így érzékeli</label>
+                  <div class="ctrack">
+                    <div class="cfill green" style="--w: 40%"></div>
+                  </div>
+                  <strong>40%</strong>
+                </div>
+                <div class="crow">
+                  <label>Nehéz abbahagyni – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill plum" style="--w: 29%"></div>
+                  </div>
+                  <strong>29%</strong>
+                </div>
+                <div class="crow">
+                  <label>Nehéz abbahagyni – szülő</label>
+                  <div class="ctrack">
+                    <div class="cfill red" style="--w: 62%"></div>
+                  </div>
+                  <strong>62%</strong>
+                </div>
+                <div class="crow">
+                  <label>21 óra után – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill gold" style="--w: 21%"></div>
+                  </div>
+                  <strong>21%</strong>
+                </div>
+                <div class="crow">
+                  <label>21 óra után – szülő</label>
+                  <div class="ctrack">
+                    <div class="cfill gold" style="--w: 29%"></div>
+                  </div>
+                  <strong>29%</strong>
+                </div>
+                <div class="crow">
+                  <label>Online kapcsolat barátokkal – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill green" style="--w: 60%"></div>
+                  </div>
+                  <strong>60%</strong>
+                </div>
+              </div>
+            </div>
+            <div class="chartCard">
+              <h3>Láthatatlanabb kockázatok</h3>
+              <p>
+                Itt nem pánikról van szó: ezek azok a helyzetek, amelyeknél
+                fontos, hogy a gyerek merjen szólni.
+              </p>
+              <div class="compareChart">
+                <div class="crow">
+                  <label>Zavaró tartalom – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill red" style="--w: 80%"></div>
+                  </div>
+                  <strong>80%</strong>
+                </div>
+                <div class="crow">
+                  <label>Zavaró tartalom – szülő</label>
+                  <div class="ctrack">
+                    <div class="cfill gold" style="--w: 46%"></div>
+                  </div>
+                  <strong>46%</strong>
+                </div>
+                <div class="crow">
+                  <label>Online konfliktus – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill red" style="--w: 73%"></div>
+                  </div>
+                  <strong>73%</strong>
+                </div>
+                <div class="crow">
+                  <label>Online konfliktus – szülő</label>
+                  <div class="ctrack">
+                    <div class="cfill gold" style="--w: 38%"></div>
+                  </div>
+                  <strong>38%</strong>
+                </div>
+                <div class="crow">
+                  <label>Áthívás platformra – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill plum" style="--w: 47%"></div>
+                  </div>
+                  <strong>47%</strong>
+                </div>
+                <div class="crow">
+                  <label>Áthívás platformra – szülő</label>
+                  <div class="ctrack">
+                    <div class="cfill gold" style="--w: 23%"></div>
+                  </div>
+                  <strong>23%</strong>
+                </div>
+                <div class="crow">
+                  <label>Felnőttnek szólt – gyerek</label>
+                  <div class="ctrack">
+                    <div class="cfill green" style="--w: 67%"></div>
+                  </div>
+                  <strong>67%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="takeawayGrid">
+            <div class="takeawayBox" data-zoomable-stat="true">
+              <b>1. Nem csak mennyiség</b
+              ><span
+                >A használat minősége, ideje és következménye fontosabb, mint a
+                puszta perc.</span
+              >
+            </div>
+            <div class="takeawayBox" data-zoomable-stat="true">
+              <b>2. Rálátási rés</b
+              ><span
+                >A gyerekek több kockázatot jeleznek, mint amennyi a szülői
+                oldalon látszik.</span
+              >
+            </div>
+            <div class="takeawayBox" data-zoomable-stat="true">
+              <b>3. Beszélgetés kell</b
+              ><span
+                >A kontroll önmagában ritkán elég: biztonságos segítségkérési
+                útvonal is segíthet.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">4. Értelmezés</span>
+          <h2>A percepciós rés nem ellentmondás, hanem beszélgetési jelzés</h2>
+          <div class="vs">
+            
+            <div class="vsbox good">
+              <div class="label">Hasznosabb értelmezés</div>
+              <q
+                >Lehet, hogy a felnőtt figyel, de a gyerek ezt nem mindig éli
+                meg biztonságos rálátásként.</q
+              >
+              <p>
+                Ez nem hibát jelez, hanem beszélgetési pontot: gyakran
+                könnyebben működik néhány kíváncsi, konkrét, ítélkezésmentes
+                kérdés.
+              </p>
+            </div>
+          </div>
+          <div class="grid three">
+            <div class="card compact">
+              <h3>Monitorozás</h3>
+              <p>
+                „Megnéztem, kivel játszol.” Ez szükséges lehet, de önmagában nem
+                mindig épít közös nyelvet.
+              </p>
+            </div>
+            <div class="card compact">
+              <h3>Érdeklődés</h3>
+              <p>
+                „Mutasd meg, mi ebben a jó.” Ez hidat épít a szülői világ és a
+                gyerek online világa között.
+              </p>
+            </div>
+            <div class="card compact">
+              <h3>Biztonság</h3>
+              <p>
+                „Ha baj van, először szólhatsz.” Ez növeli annak esélyét, hogy a
+                gyerek ne maradjon egyedül a problémával.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">5. Mi történik a képernyő mögött?</span>
+          <h2>Miért olyan nehéz letenni a telefont?</h2>
+          <p class="lead">
+            Nem csak akaraterő kérdése. A gyerek egyszerre van társas
+            helyzetben, platformlogikában és fejlődéslélektani nyomás alatt.
+          </p>
+          <div class="whyHardGrid">
+            <div class="whyCard cool">
+              <div class="cardNum">1</div>
+              <h3>1. Társas tér</h3>
+              <p>A barátok is ott vannak.</p>
+              <div class="pillRow">
+                <div class="dataPill"><b>67%</b> legalább hetente multiplayer</div>
+                <div class="dataPill"><b>60%</b> online is tartja a kapcsolatot barátaival</div>
+              </div>
+            </div>
+            <div class="whyCard warm">
+              <div class="cardNum">2</div>
+              <h3>2. Platformlogika</h3>
+              <p>A rendszer visszahív.</p>
+              <div class="miniHighlight">Autoplay, jutalom, „még egy kör”.</div>
+            </div>
+            <div class="whyCard green">
+              <div class="cardNum">3</div>
+              <h3>3. FOMO</h3>
+              <p>A kimaradás fájdalmas.</p>
+              <div class="miniHighlight">Sokszor a kapcsolódáshoz ragaszkodik.</div>
+            </div>
+          </div>
+          <div class="ribbon">
+            A mindennapok nyelvén: sokszor könnyebben működik, ha nem csak az
+            hangzik el, hogy „tedd le”, hanem előre tisztázódik, mikor van
+            utolsó kör, mikor lehet elköszönni, és mikor kerül a telefon
+            parkolóba.
+          </div>
+        </div>
+      </section>
+      
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">6. A mérleg másik nyelve</span>
+          <h2>Az online tér nem csak veszélyforrás</h2>
+          <p class="lead">
+            A gyerekek számára hitelesebb a beszélgetés, ha az online tér
+            előnyeit is elismerjük: a jól szabályozott digitális jelenlétben
+            lehet fejlődés, kreativitás és kapcsolat. Így a határtartás kevésbé
+            hat a gyerek hobbija elleni támadásnak.
+          </p>
+          <div class="grid four">
+            <div class="rule">
+              <b>Angol és kommunikáció</b>
+              <p>szavak, instrukciók, üzenetek</p>
+            </div>
+            <div class="rule">
+              <b>Stratégiai gondolkodás</b>
+              <p>tervezés, együttműködés</p>
+            </div>
+            <div class="rule">
+              <b>Digitális kreativitás</b>
+              <p>nem csak fogyaszt, alkot is</p>
+            </div>
+            <div class="rule">
+              <b>Kapcsolódás</b>
+              <p>barátok online is</p>
+            </div>
+          </div>
+          
+          <div class="ribbon">
+            Nem minden családban ugyanaz fog működni. Sokszor már az is segít,
+            ha kíváncsi felnőttként pár percre belépünk a gyerek világába.
+          </div>
+        </div>
+      </section>
+      <section class="slide dense">
+        <div class="stage">
+          <span class="kicker">7. Kockázatok</span>
+          <h2>Ötödikes korban az online bántás gyakran rejtett</h2>
+          <p class="lead">
+            A felnőttek sokszor fenyegetésre vagy idegen zaklatására gondolnak.
+            A gyerekeknél viszont a bántás sokszor apróbbnak tűnik, mégis erősen
+            megviselheti őket. Ami online elindul, az másnap az osztályban is
+            megjelenhet.
+          </p>
+          <div class="grid four">
+            <div class="rule">
+              <b>Kizárás</b>
+              <p>
+                Valakit nem hívnak be a közös Viber/Discord csoportba, vagy
+                látványosan némítanak.
+              </p>
+            </div>
+            <div class="rule">
+              <b>Screenshot</b>
+              <p>
+                Engedély nélkül továbbküldenek róla egy képernyőfotót, üzenetet
+                vagy kínos képet.
+              </p>
+            </div>
+            <div class="rule">
+              <b>Játékbeli bosszú</b>
+              <p>
+                Szándékosan „kilövik”, hátráltatják, kirabolják vagy
+                trollkodással bosszantják a saját csapattársat.
+              </p>
+            </div>
+            <div class="rule">
+              <b>Csoportos poén</b>
+              <p>
+                A gyerek azt hallja: „csak vicc volt”, de valójában ő lett a
+                poén tárgya.
+              </p>
+            </div>
+          </div>
+          <div class="dataMini">
+            <div class="miniBox">
+              <b>13%</b
+              ><span>gyerek jelzett online bántást az elmúlt 2 hónapban</span>
+            </div>
+            <div class="miniBox">
+              <b>29%</b><span>szülő szerint előfordult online bántás</span>
+            </div>
+            <div class="miniBox">
+              <b>73%</b><span>online konfliktus átkerült az osztályba</span>
+            </div>
+            <div class="miniBox">
+              <b>80%</b><span>zavaró/ijesztő tartalommal találkozott</span>
+            </div>
+          </div>
+          <div class="ribbon">
+            <strong>Kulcs:</strong> nem kell minden gyerekvitát „ügyként”
+            kezelni, de a megalázás, kizárás, fenyegetés, képtovábbítás és
+            privát áthívás nem maradhat láthatatlan. Osztályközösségi
+            szempontból itt közös nyelvre van szükség.
+          </div>
+        </div>
+      </section>
+      <section class="slide dense">
+        <div class="stage">
+          <span class="kicker">8. Online konfliktusok</span>
+          <h2>Online indul, de az osztályban is folytatódhat</h2>
+          <p class="lead">
+            A helyi adatok legerősebb jelzése: az online viták nem maradnak a
+            telefonban. Itt nem hibást keresünk, hanem közös minimumot és közös
+            nyelvet keresünk.
+          </p>
+          <div class="grid two">
+            <div class="stat" style="--tone: rgba(255, 177, 153, 0.24)">
+              <div class="value">73<small>%</small></div>
+              <p>
+                gyerekek szerint online konfliktus már átkerült az
+                osztályközösségbe
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Közös minimum, nem felelősségtologatás</h3>
+              <ul class="compactList">
+                <li>
+                  ha az online vita az osztályban folytatódik, érdemes lehet nem
+                  szőnyeg alá söpörni;
+                </li>
+                <li>
+                  a csoportchat-szabályok és netikett visszatérő téma lehet;
+                </li>
+                <li>
+                  segítségkérésnél sokat számít, ha nem az áldozat
+                  hibáztatása az első reakció;
+                </li>
+                <li>
+                  mediáció: mi történt, kit érint, hogyan lehet jóvátenni;
+                </li>
+                <li>
+                  ismétlődésnél szülő–osztályfőnök–iskolai segítő együttműködés.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tightNote">
+            Üzenet a gyereknek: nem maradsz egyedül, és felelősséged is van
+            abban, amit online írsz, küldesz vagy továbbadsz.
+          </div>
+        </div>
+      </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">9. Este és alvás</span>
+          <h2>Az este a legkritikusabb zóna</h2>
+          <p class="lead">
+            Az alvással kapcsolatos kutatási háttér következetes: a lefekvés
+            körüli eszközhasználat könnyen későbbi elalvással, rövidebb
+            alvással, rosszabb másnapi figyelemmel és több családi vitával
+            járhat együtt.
+          </p>
+          <div class="grid three">
+            <div class="card">
+              <h3>Nem minden esti használat ugyanaz</h3>
+              <p>
+                Egy nyugodt zenehallgatás más, mint egy felpörgető multiplayer
+                meccs vagy egy konfliktusos csoportchat.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Ne 21:30-kor tárgyaljuk újra</h3>
+              <p>
+                Az esti keret gyakran könnyebben működik, ha nyugodt időben
+                beszéljük át. Fáradtan a felnőtt is engedékenyebb vagy
+                dühösebb lehet.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Sokat segíthet, ha az ágy nem válik online térré</h3>
+              <p>
+                Egyes családoknál működhet, ha a telefon nem az ágy mellett
+                töltődik. A „telefonparkoló” lehet egy kipróbálható,
+                alvásvédő rutin.
+              </p>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="step">
+              <div class="num">1</div>
+              <h3>Utolsó kör</h3>
+              <p>Előre jelzett lezárás: mikor indulhat az utolsó játék.</p>
+            </div>
+            <div class="step">
+              <div class="num">2</div>
+              <h3>Levezetés</h3>
+              <p>Felpörgető játék helyett nyugodtabb esti rutin.</p>
+            </div>
+            <div class="step">
+              <div class="num">3</div>
+              <h3>Parkoló</h3>
+              <p>Közös, látható töltőhely, nem az ágy mellett.</p>
+            </div>
+            <div class="step">
+              <div class="num">4</div>
+              <h3>Reggeli hatás</h3>
+              <p>Másnap figyeljük: fáradtság, ingerlékenység, vita.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">10. Mindennapi helyzetek</span>
+          <h2>Nem csak szabály számít, hanem a kiszámítható keret is</h2>
+          <p class="lead">
+            Ezek nem „jó” vagy „rossz” szülői reakciók, hanem sokszor fáradt
+            helyzetekre adott emberi válaszok. Hosszabb távon általában a
+            kiszámíthatóbb keret csökkenti a vitát.
+          </p>
+          <div class="grid three">
+            <div class="card compact">
+              <h3>Amikor már mindenki fáradt</h3>
+              <p>
+                „Azonnal leteszed, mert azt mondtam.” Rövid távon lezárhatja a
+                vitát, de könnyen növeli az ellenállást és a titkolózást.
+              </p>
+            </div>
+            <div class="card compact">
+              <h3>Amikor vita helyett engedünk</h3>
+              <p>
+                „Jó, még tíz perc, csak ne legyen vita.” Ilyenkor a lezárás
+                helyett az alkudozás marad meg mintázatként.
+              </p>
+            </div>
+            <div class="card compact">
+              <h3>Amikor nehéz követni az online világot</h3>
+              <p>
+                „Én ehhez nem értek.” Ilyenkor könnyen nagyobb szabadság marad,
+                mint amennyihez elegendő rálátás társul.
+              </p>
+            </div>
+          </div>
+          <div class="vs">
+            <div class="vsbox good">
+              <div class="label">Kapcsolódó, határt tartó mondat</div>
+              <q>Értem, hogy fontos neked, de tartjuk a megbeszélt határt.</q>
+              <p>
+                Ez nem támadja a gyereket, mégis világossá teszi, hogy a keret
+                nem indulatból születik.
+              </p>
+            </div>
+            <div class="vsbox good">
+              <div class="label">Megnyugtató keret</div>
+              <q>Nem ellened vagyok, hanem az esti nyugalmat védem.</q>
+              <p>
+                A gyerek így nem csak tiltást hall, hanem jobban érti a keret
+                mögötti célt.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">11. Családdinamika</span>
+          <h2>A képernyő sokszor gyors feszültségkezelő eszköz</h2>
+          <p class="lead">
+            Sok családban ez érthető túlélési megoldás egy fáradt hétköznapon:
+            a telefon rövid távon működik, csend lesz, lekötődik, vége a
+            vitának. A kérdés inkább az, marad-e mellette más út is a
+            megnyugvásra, várakozásra és kapcsolódásra.
+          </p>
+          <div class="grid two">
+            <div class="panel" style="padding: 13px 14px">
+              <h3>Amikor a képernyő „megoldás”</h3>
+              <ul class="compactList">
+                <li>fáradt a család, nincs erő újabb konfliktusra;</li>
+                <li>a gyerek unatkozik vagy nyűgös;</li>
+                <li>a szülőnek kell 10 perc nyugalom;</li>
+                <li>a testvérkonfliktust gyorsan csillapítani kell;</li>
+                <li>a telefon azonnal működik, a nevelés lassabb.</li>
+              </ul>
+            </div>
+            <div class="panel" style="padding: 13px 14px">
+              <h3>Mit érdemes mellé építeni?</h3>
+              <ul class="compactList">
+                <li>unalomtűrés: nem minden üres percet szükséges kitölteni;</li>
+                <li>mozgás vagy séta mint levezetés;</li>
+                <li>offline kapcsolódás: rövid közös rituálék;</li>
+                <li>érzelemnév: „látom, most nagyon felpörögtél”;</li>
+                <li>szülői minta: beszélgetés közben félretett telefon.</li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="kicker dark"
+            style="margin-top: 10px; padding: 7px 12px; font-size: 12px"
+          >
+            Helyi adatokból látszik
+          </div>
+          <div
+            class="dataMini"
+            style="margin-top: 8px; grid-template-columns: repeat(3, 1fr)"
+          >
+            <div class="miniBox" style="padding: 9px 10px">
+              <b>53%</b>
+              <span
+                >online után legalább egyszer rosszkedvűbbnek vagy
+                idegesebbnek érezte magát</span
+              >
+            </div>
+            <div class="miniBox" style="padding: 9px 10px">
+              <b>53%</b>
+              <span
+                >legalább egyszer unalom, feszültség vagy rosszkedv esetén
+                netezett/játszott</span
+              >
+            </div>
+            <div class="miniBox" style="padding: 9px 10px">
+              <b>13%</b>
+              <span
+                >ez többször vagy gyakran is megjelent — erre már érdemes külön
+                figyelni</span
+              >
+            </div>
+          </div>
+          <div class="ribbon">
+            A helyi adatok alapján a képernyő nemcsak szórakozás, hanem néha
+            hangulatszabályozó eszköz is. Ez nem diagnózis, és nem feltétlenül
+            baj: a kérdés inkább az, marad-e más út is a megnyugvásra.
+          </div>
+        </div>
+      </section>
+      
+      <section class="slide dense">
+        <div class="stage">
+          <span class="kicker">12. Roblox-példa</span>
+          <h2>
+            Roblox: nem „tiltandó játék”, hanem különösen figyelendő társas tér
+          </h2>
+          <p class="lead">
+            A helyi válaszokban is megjelent, és nemzetközileg is komoly
+            gyermekvédelmi viták, perek és szabályozási lépések kapcsolódnak
+            hozzá. A legfontosabb minta: a kockázat gyakran kedves
+            kapcsolódással, ajándékígérettel vagy privátba hívással indul.
+          </p>
+          <div class="bigAlert">
+            <div class="alertMetric red">
+              <b>24 000+</b
+              ><span
+                >Roblox-jelentés a NCMEC felé 2024-ben feltételezett
+                gyermek-szexuális kizsákmányolás ügyében.</span
+              >
+            </div>
+            <div class="alertMetric gold">
+              <b>140+</b
+              ><span
+                >szövetségi per az USA-ban, amelyek gyermekek szexuális
+                kizsákmányolásával kapcsolatos állításokat fogalmaznak
+                meg.</span
+              >
+            </div>
+           
+          </div>
+          <div class="caseGrid">
+            <div class="caseBox warningSoft">
+              <h3>Grooming-minta</h3>
+              <p>
+                Nem fenyegetéssel indul: „segítek”, „adok Robuxot”, „menő vagy”,
+                „gyere Discordra”. A cél sokszor az, hogy a gyerek a felnőtt
+                rálátásból privátabb, kevésbé ellenőrizhető térbe kerüljön.
+              </p>
+            </div>
+            <div class="caseBox warningSoft">
+              <h3>Szélsőséges / neonáci szubkultúrák</h3>
+              <p>
+                A 764 / The Com típusú online kizsákmányoló hálózatokról szóló
+                beszámolók szerint a belépési pont lehet játékplatform vagy
+                chat; a mélyebb kontroll gyakran Discordon, Telegramon vagy
+                privát csoportban épül fel.
+              </p>
+            </div>
+          </div>
+          <div class="tightNote">
+            Nem a Roblox démonizálása a cél, hanem annak megértése, hogy a
+            privátba hívás, ajándékígéret és titkolózás kockázati jel lehet. Ha
+            valaki ilyet kér, a gyerek szólhat — nem ő kerül bajba azért, mert
+            elmondta.
+          </div>
+          <div class="sourceNote">
+            Forráslogika: Reuters / Guardian / AP / NCMEC-adatokra hivatkozó
+            beszámolók és 2026-os chatmoderációs kutatás. A Roblox vitatja a
+            jogsértési állításokat, és új biztonsági intézkedéseket vezetett be;
+            a dia célja nem démonizálás, hanem egy kockázati minta felismerése.
+          </div>
+        </div>
+      </section>
+      <section class="slide dense">
+        <div class="stage">
+          <span class="kicker">13. Otthoni megállapodás</span>
+          <h2>A kiszámítható szabály általában kevesebb vitát hoz</h2>
+          <p class="lead">
+            A digitális családi keret gyakran könnyebben működik, ha nem csak
+            tiltást mond, hanem helyzetet, időpontot, megosztási szabályt és
+            segítségkérési útvonalat is előre tisztáz.
+          </p>
+          <div class="grid five">
+            <div class="rule">
+              <b>Idő</b>
+              <p>előre tudható</p>
+            </div>
+            <div class="rule">
+              <b>Hely</b>
+              <p>képernyőmentes zóna</p>
+            </div>
+            <div class="rule">
+              <b>Tartalom</b>
+              <p>mit és kivel?</p>
+            </div>
+            <div class="rule">
+              <b>Pénz</b>
+              <p>csak jóváhagyással</p>
+            </div>
+            <div class="rule">
+              <b>Megosztás</b>
+              <p>képet nem továbbítunk</p>
+            </div>
+          </div>
+          <div class="vs">
+            <div class="vsbox bad">
+              <div class="label">Nehezebben működő szabály</div>
+              <q>Ne telefonozz annyit!</q>
+              <p>
+                Túl általános, vita közben mást jelent a szülőnek és mást a
+                gyereknek.
+              </p>
+            </div>
+            <div class="vsbox good">
+              <div class="label">Kiszámíthatóbb szabály</div>
+              <q
+                >Hétköznap 20:30 után nincs új játék, 21:00-kor
+                telefonparkoló.</q
+              >
+              <p>
+                Konkrét, mérhető, előre megbeszélhető, ezért kevésbé válik
+                alkudozássá.
+              </p>
+            </div>
+          </div>
+          <div class="ribbon">
+            <strong>Egy fontos közös mondat:</strong> ami felkerül vagy
+            elküldésre kerül, az továbbküldhető. A „legjobb barátok” zárt
+            csoportja sem teljesen kontrollálható tér.
+          </div>
+        </div>
+      </section>
+      <section class="slide dense">
+        <div class="stage">
+          <span class="kicker">14. Technikai segítség</span>
+          <h2>A szabályt nem csak megbeszélni, beállítani is lehet</h2>
+          <p class="lead">
+            A technikai beállítás nem nevelés helyett van, hanem a mindennapi
+            viták csökkentésére segíthet.
+          </p>
+          <div class="grid four">
+            <div class="rule">
+              <b>Google Family Link</b>
+              <p>appkorlát, nem kell harc, csak együttérzés</p>
+            </div>
+           
+            <div class="rule">
+              <b>Router / Wi-Fi időzítés</b>
+              <p>otthoni időzítés</p>
+            </div>
+            <div class="rule">
+              <b>Fontos korlát</b>
+              <p>nem helyettesíti a beszélgetést</p>
+            </div>
+          </div>
+          <div class="ribbon">
+            A legjobban általában az a beállítás működik, amit a gyerek előre
+            ismer: mikor zár, mi marad elérhető, és miért történik.
+          </div>
+        </div>
+      </section>
+      
+      <section class="slide dense">
+        <div class="stage">
+          <span class="kicker">16. Közös folyamat</span>
+          <h2>Nem kell mindent egyszerre megoldani</h2>
+          <p class="lead">
+            Egy fáradt családnak sokszor nem újabb projekt segít, hanem néhány
+            kicsi, kipróbálható otthoni kapaszkodó.
+          </p>
+          <div class="practicalGrid">
+            <div class="practicalCard">
+              <b>1. Utolsó kör</b>
+              <p>Segíthet, ha előre tisztázódik, mikor indulhat az utolsó játék vagy videó.</p>
+            </div>
+            <div class="practicalCard">
+              <b>2. Telefonparkoló</b>
+              <p>
+                Egyes családoknál működhet, ha este a telefon közös, látható
+                helyre kerül. Nem büntetés, hanem alvásvédő rutin.
+              </p>
+            </div>
+            <div class="practicalCard">
+              <b>3. Segítségkérési mondat</b>
+              <p>
+                Ha online baj van, először lehessen szólni. Nem a telefonelvétel
+                az első reakció.
+              </p>
+            </div>
+          </div>
+          <div class="panel" style="margin-top: 10px; padding: 12px 13px">
+            <h3>Két kipróbálható otthoni kapaszkodó</h3>
+            <div class="homeMinGrid">
+              <div class="homeMinCard">
+                <b>Képernyőmentes zónák</b>
+                <p>
+                  Sok családban segíthet, ha az étkezőasztal és a hálószoba
+                  képernyőmentes tér. Ez gyakran stabilabb, mint a napi percek
+                  körüli alkudozás — főleg, ha a felnőtt is tartja.
+                </p>
+              </div>
+              <div class="homeMinCard">
+                <b>Lefordított telefon</b>
+                <p>
+                  Ha a gyerek beszél hozzánk, a telefont kijelzővel lefelé
+                  fordítjuk vagy eltesszük. Ez egy apró jelzés lehet: most rád
+                  figyelek.
+                </p>
+              </div>
+            </div>
+            <div class="homeMinNote">
+              Ezek nem nagy szabályrendszerek, hanem apró családi
+              mikroszokások. Pont ezért könnyebben tarthatók.
+            </div>
+          </div>
+          <div class="ribbon">
+            A cél nem egységes recept, hanem kevesebb vita és több
+            kiszámíthatóság néhány működő, ismételhető családi rutin mentén.
+          </div>
+        </div>
+      </section>
+      <section class="slide final">
+        <div class="stage">
+          <span class="kicker">Zárás</span>
+          <h2>Nem hibást keresünk, hanem közös kapaszkodókat</h2>
+          <div class="grid three">
+            <div class="card">
+              <h3>Rálátás</h3>
+              <p>
+                Nem csak az látszik, mennyit volt telefonon, hanem az is
+                beszélgetési pont lehet, mit csinált ott és kikkel volt.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Kiszámítható határ</h3>
+              <p>
+                Nem dühből, nem kiszámíthatatlanul, hanem előre ismert, alvást
+                és kapcsolatot védő keretek mentén.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Biztonságos segítségkérés</h3>
+              <p>
+                A gyerek tudhatja: ha online rossz történik, nem marad egyedül,
+                és nem a büntetés az első reakció.
+              </p>
+            </div>
+          </div>
+          <div class="quote" style="margin-top: 28px">
+            Ha ebből az estéből csak egy gondolat marad meg: nem az a cél, hogy
+            minden család ugyanúgy szabályozza a telefont, hanem hogy a gyerek
+            tudja, hol van a határ, és baj esetén merjen szólni egy
+            felnőttnek.
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="mobileNav" id="mobileNav" aria-label="Mobil dia navigáció">
+      <button id="mobilePrev" type="button">Előző</button>
+      <div class="mobileNavCount" id="mobileCounter">1 / 17</div>
+      <button id="mobileNext" type="button">Következő</button>
+    </div>
+    <div class="footerline">
+      <span class="counter" id="counter">1 / 17</span>
+    </div>
+    <div class="zoomOverlay" id="zoomOverlay" aria-hidden="true">
+      <div
+        class="zoomDialog"
+        id="zoomDialog"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Felnagyított nézet"
+        tabindex="-1"
+      >
+        <button
+          class="zoomClose"
+          id="zoomClose"
+          type="button"
+          aria-label="Bezárás"
+        >
+          ×
+        </button>
+        <div class="zoomContent" id="zoomContent"></div>
+      </div>
+    </div>
+    <script>
+      (function () {
+        const slides = Array.from(document.querySelectorAll(".slide"));
+        const deck = document.getElementById("deck");
+        const progress = document.getElementById("progressBar");
+        const counter = document.getElementById("counter");
+        const dots = document.getElementById("dots");
+        const mobileCounter = document.getElementById("mobileCounter");
+        const mobilePrev = document.getElementById("mobilePrev");
+        const mobileNext = document.getElementById("mobileNext");
+        const zoomOverlay = document.getElementById("zoomOverlay");
+        const zoomDialog = document.getElementById("zoomDialog");
+        const zoomClose = document.getElementById("zoomClose");
+        const zoomContent = document.getElementById("zoomContent");
+        const zoomSelector =
+          '.stat, .chartCard, .donutCard, .takeawayBox[data-zoomable-stat="true"], .compareChart, .crow';
+        let current = 0;
+        let activeZoomSource = null;
+        let closeTimer = null;
+        function isMobileMode() {
+          return window.innerWidth <= 900;
+        }
+        slides.forEach((_, i) => {
+          const d = document.createElement("span");
+          d.className = "dot";
+          d.addEventListener("click", () => go(i));
+          dots.appendChild(d);
+        });
+        const dotEls = Array.from(document.querySelectorAll(".dot"));
+        const zoomables = Array.from(document.querySelectorAll(zoomSelector));
+        zoomables.forEach((el, i) => {
+          el.classList.add("zoomable");
+          el.setAttribute("tabindex", "0");
+          el.setAttribute("role", "button");
+          el.setAttribute("aria-haspopup", "dialog");
+          if (!el.id) el.id = "zoom-source-" + (i + 1);
+          el.setAttribute("aria-controls", "zoomDialog");
+        });
+        function applySlideState() {
+          const mobile = isMobileMode();
+          slides.forEach((s, idx) =>
+            s.classList.toggle("active", mobile ? true : idx === current),
+          );
+          dotEls.forEach((d, idx) =>
+            d.classList.toggle("active", idx === current),
+          );
+        }
+        function updateMode() {
+          const mobile = isMobileMode();
+          document.documentElement.classList.toggle("mobile-mode", mobile);
+          document.documentElement.classList.toggle("presentation-mode", !mobile);
+          document.body.classList.toggle("mobile-mode", mobile);
+          document.body.classList.toggle("presentation-mode", !mobile);
+          applySlideState();
+          fit();
+        }
+        function fit() {
+          if (isMobileMode()) {
+            slides.forEach((slide) => {
+              const stage = slide.querySelector(".stage");
+              if (stage) stage.style.setProperty("--scale", "1");
+            });
+            return;
+          }
+          const slide = slides[current];
+          const stage = slide?.querySelector(".stage");
+          if (!stage) return;
+          stage.style.setProperty("--scale", "1");
+          requestAnimationFrame(() => {
+            const maxW = window.innerWidth - 104;
+            const maxH = window.innerHeight - 86;
+            const rawW = Math.max(
+              stage.scrollWidth,
+              stage.getBoundingClientRect().width,
+            );
+            const rawH = Math.max(
+              stage.scrollHeight,
+              stage.getBoundingClientRect().height,
+            );
+            const scale = Math.min(1, maxW / rawW, maxH / rawH) * 0.985;
+            stage.style.setProperty(
+              "--scale",
+              Math.max(0.45, scale).toFixed(3),
+            );
+          });
+        }
+        function go(i) {
+          current = Math.max(0, Math.min(slides.length - 1, i));
+          applySlideState();
+          progress.style.width =
+            (((current + 1) / slides.length) * 100).toFixed(2) + "%";
+          counter.textContent = current + 1 + " / " + slides.length;
+          if (mobileCounter) mobileCounter.textContent = current + 1 + " / " + slides.length;
+          if (mobilePrev) mobilePrev.disabled = current === 0;
+          if (mobileNext) mobileNext.disabled = current === slides.length - 1;
+          fit();
+          if (!isMobileMode()) {
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          }
+        }
+        function next() {
+          go(current + 1);
+        }
+        function prev() {
+          go(current - 1);
+        }
+        function isModalOpen() {
+          return zoomOverlay.classList.contains("open");
+        }
+        function trapFocus(e) {
+          if (e.key !== "Tab" || !isModalOpen()) return;
+          const focusables = Array.from(
+            zoomDialog.querySelectorAll(
+              'button,[href],[tabindex]:not([tabindex="-1"])',
+            ),
+          ).filter((el) => !el.disabled);
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+        function closeZoom(restoreFocus = true) {
+          if (!isModalOpen()) return;
+          zoomOverlay.classList.remove("open");
+          zoomOverlay.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("modal-open");
+          clearTimeout(closeTimer);
+          closeTimer = window.setTimeout(
+            () => zoomContent.replaceChildren(),
+            180,
+          );
+          if (restoreFocus && activeZoomSource) {
+            activeZoomSource.focus({ preventScroll: true });
+          }
+          activeZoomSource = null;
+        }
+        function openZoom(source) {
+          if (!source) return;
+          clearTimeout(closeTimer);
+          activeZoomSource = source;
+          const clone = source.cloneNode(true);
+          clone.classList.remove("zoomable");
+          clone.removeAttribute("id");
+          clone.removeAttribute("tabindex");
+          clone.removeAttribute("role");
+          clone.removeAttribute("aria-haspopup");
+          clone.removeAttribute("aria-controls");
+          zoomContent.replaceChildren(clone);
+          document.body.classList.add("modal-open");
+          zoomOverlay.setAttribute("aria-hidden", "false");
+          zoomOverlay.classList.add("open");
+          zoomClose.focus({ preventScroll: true });
+        }
+        window.addEventListener("resize", updateMode);
+        document.addEventListener("keydown", (e) => {
+          const k = e.key;
+          if (isModalOpen()) {
+            if (
+              k === "Escape" ||
+              k === "Esc" ||
+              k === " " ||
+              k === "Enter" ||
+              k === "ArrowRight" ||
+              k === "ArrowLeft" ||
+              k === "PageDown" ||
+              k === "PageUp"
+            ) {
+              e.preventDefault();
+              closeZoom();
+            }
+            trapFocus(e);
+            return;
+          }
+          if (isMobileMode()) {
+            return;
+          }
+          const focusedZoomTarget = e.target.closest?.(zoomSelector);
+          if (
+            focusedZoomTarget &&
+            focusedZoomTarget.classList.contains("zoomable") &&
+            (k === " " || k === "Enter")
+          ) {
+            return;
+          }
+          if (k === " " || k === "ArrowRight" || k === "PageDown") {
+            e.preventDefault();
+            next();
+          }
+          if (k === "ArrowLeft" || k === "PageUp") {
+            e.preventDefault();
+            prev();
+          }
+          if (k === "Home") {
+            e.preventDefault();
+            go(0);
+          }
+          if (k === "End") {
+            e.preventDefault();
+            go(slides.length - 1);
+          }
+          if (k.toLowerCase() === "f") {
+            e.preventDefault();
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen?.();
+            } else {
+              document.exitFullscreen?.();
+            }
+          }
+        });
+        mobilePrev?.addEventListener("click", prev);
+        mobileNext?.addEventListener("click", next);
+        document.addEventListener("click", (e) => {
+          if (isMobileMode()) {
+            if (e.target === zoomOverlay) {
+              closeZoom();
+            }
+            return;
+          }
+          const zoomTarget = e.target.closest(zoomSelector);
+          if (
+            zoomTarget &&
+            zoomTarget.classList.contains("zoomable") &&
+            !isModalOpen()
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+            openZoom(zoomTarget);
+            return;
+          }
+          if (e.target === zoomOverlay) {
+            closeZoom();
+            return;
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          if (isModalOpen()) return;
+          if (isMobileMode()) return;
+          const zoomTarget = e.target.closest?.(zoomSelector);
+          if (!zoomTarget || !zoomTarget.classList.contains("zoomable")) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openZoom(zoomTarget);
+          }
+        });
+        zoomClose.addEventListener("click", () => closeZoom());
+        updateMode();
+        go(0);
+      })();
+    </script>
+  </body>
+</html>
