@@ -32,6 +32,13 @@
         --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
         --font-scale: 1.15;
         --display-scale: 1.06;
+        --content-max: 1360px;
+        --content-max-wide: 1440px;
+        --slide-pad-x: 76px;
+        --slide-pad-y: 72px;
+        --fit-safe-x: 76;
+        --fit-safe-y: 72;
+        --card-gap: 12px;
       }
       * {
         box-sizing: border-box;
@@ -765,19 +772,25 @@
         font-size: 30px;
       }
       .resourcesSlide .stage {
-        width: min(1140px, calc(100vw - 96px));
+        width: min(1400px, calc(100vw - 40px));
       }
       .resourcesSlide::after {
         opacity: 0.45;
       }
+      .resourcesSlide h2 {
+        max-width: none;
+      }
+      .resourcesSlide .lead {
+        max-width: 1280px;
+      }
       .resourcesGrid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin-top: 22px;
+        gap: 10px;
+        margin-top: 24px;
       }
       .resourceCard {
-        padding: 20px 18px 18px;
+        padding: 24px 22px 22px;
         border-radius: 30px;
         background: rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(23, 34, 53, 0.1);
@@ -786,52 +799,68 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-        min-height: 392px;
+        min-height: 610px;
       }
       .resourceCard a {
         color: inherit;
         text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .resourcePreview {
+        width: 192px;
+        height: 244px;
+        padding: 9px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid rgba(23, 34, 53, 0.08);
+        box-shadow: 0 12px 32px rgba(37, 55, 79, 0.1);
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+      }
+      .resourcePreview img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: top center;
+        border-radius: 16px;
+        display: block;
       }
       .resourceQrWrap {
-        width: 220px;
-        height: 220px;
-        padding: 16px;
+        width: 244px;
+        height: 244px;
+        padding: 18px;
         border-radius: 28px;
         background: white;
         border: 1px solid rgba(23, 34, 53, 0.08);
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
         display: grid;
         place-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 18px;
       }
       .resourceQrWrap img {
-        width: 188px;
-        height: 188px;
+        width: 208px;
+        height: 208px;
         display: block;
         image-rendering: pixelated;
       }
       .resourceCard h3 {
-        font-size: 25px;
+        font-size: 24px;
         line-height: 1.08;
         margin-bottom: 8px;
-        max-width: 290px;
+        max-width: 320px;
       }
       .resourceType {
-        font-size: 17px;
+        font-size: 18px;
         line-height: 1.35;
         color: #496074;
         font-weight: 760;
       }
-      .resourceUrl {
-        margin-top: 12px;
-        font-size: 12px;
-        line-height: 1.3;
-        color: #6b7988;
-        word-break: break-word;
-      }
       .resourcesNote {
-        margin-top: 18px;
-        padding: 15px 18px;
+        margin-top: 20px;
+        padding: 16px 24px;
         border-radius: 24px;
         background: linear-gradient(
           135deg,
@@ -839,11 +868,12 @@
           rgba(223, 245, 231, 0.74)
         );
         border: 1px solid rgba(23, 34, 53, 0.1);
-        font-size: 21px;
-        line-height: 1.38;
+        font-size: 22px;
+        line-height: 1.36;
         font-weight: 780;
         color: #274056;
         text-align: center;
+        width: 100%;
       }
 
       /* Grafikonos százalékos dia */
@@ -1206,37 +1236,37 @@
 
       /* === 2026-05 projector stability patch: no more cropped/overlapping slides === */
       .stage {
-        width: min(1120px, calc(100vw - 104px));
+        width: min(var(--content-max), calc(100vw - var(--slide-pad-x)));
       }
       h1 {
-        font-size: clamp(57px, 5.35vw, 74px);
+        font-size: clamp(60px, 5.55vw, 78px);
         line-height: 0.94;
         margin-top: 16px;
       }
       h2 {
-        font-size: clamp(38px, 4.18vw, 51px);
+        font-size: clamp(41px, 4.38vw, 55px);
         line-height: 1;
         margin-top: 13px;
-        max-width: 1050px;
+        max-width: 1180px;
       }
       h3 {
-        font-size: clamp(18px, 1.7vw, 22px);
+        font-size: clamp(19px, 1.85vw, 23px);
         line-height: 1.12;
         margin-bottom: 7px;
       }
       .lead {
-        font-size: clamp(20px, 1.72vw, 23px);
+        font-size: clamp(21.5px, 1.9vw, 25px);
         line-height: 1.34;
         margin-top: 12px;
-        max-width: 1050px;
+        max-width: 1180px;
       }
       .sublead {
-        font-size: 20px;
-        line-height: 1.42;
+        font-size: 21.5px;
+        line-height: 1.4;
         margin-top: 8px;
       }
       .grid {
-        gap: 11px;
+        gap: var(--card-gap);
         margin-top: 15px;
       }
       .tagrow {
@@ -1265,8 +1295,8 @@
       .panel p,
       .warning p,
       .softbox p {
-        font-size: 19px;
-        line-height: 1.42;
+        font-size: 20.4px;
+        line-height: 1.41;
       }
       .card ul,
       .panel ul,
@@ -1279,8 +1309,8 @@
       .panel li,
       .warning li,
       .softbox li {
-        font-size: 18.8px;
-        line-height: 1.38;
+        font-size: 20px;
+        line-height: 1.37;
         margin: 4px 0;
       }
       .rule {
@@ -1293,8 +1323,8 @@
         margin-bottom: 5px;
       }
       .rule p {
-        font-size: 18px;
-        line-height: 1.36;
+        font-size: 19px;
+        line-height: 1.34;
       }
       .punch {
         grid-template-columns: 54px 1fr;
@@ -1309,15 +1339,15 @@
         font-size: 26px;
       }
       .punch p {
-        font-size: 18.8px;
-        line-height: 1.37;
+        font-size: 19.6px;
+        line-height: 1.35;
       }
       .ribbon {
         margin-top: 13px;
         padding: 10px 13px;
         border-radius: 20px;
-        font-size: 20px;
-        line-height: 1.35;
+        font-size: 21px;
+        line-height: 1.33;
       }
       .quote {
         margin-top: 14px;
@@ -1347,8 +1377,8 @@
         font-size: 18px;
       }
       .step p {
-        font-size: 18px;
-        line-height: 1.36;
+        font-size: 19px;
+        line-height: 1.34;
       }
       .vs {
         gap: 11px;
@@ -1363,8 +1393,8 @@
         line-height: 1.2;
       }
       .vsbox p {
-        font-size: 18px;
-        line-height: 1.37;
+        font-size: 19px;
+        line-height: 1.35;
         margin-top: 8px;
       }
       .vsbox .label {
@@ -1383,8 +1413,8 @@
         font-size: 18px;
       }
       .cell p {
-        font-size: 18.5px;
-        line-height: 1.37;
+        font-size: 19.4px;
+        line-height: 1.35;
       }
       .stat {
         padding: 14px;
@@ -1398,8 +1428,8 @@
         font-size: 26px;
       }
       .stat p {
-        font-size: 17.6px;
-        line-height: 1.32;
+        font-size: 18.6px;
+        line-height: 1.31;
       }
       .chartBoard {
         gap: 9px;
@@ -1416,25 +1446,25 @@
         font-size: 18px;
       }
       .chartCard p {
-        font-size: 17.6px;
-        line-height: 1.34;
+        font-size: 18.6px;
+        line-height: 1.32;
         margin-bottom: 8px;
       }
       .compareChart {
         gap: 7px;
       }
       .crow {
-        grid-template-columns: 178px 1fr 72px;
+        grid-template-columns: 190px 1fr 76px;
         gap: 8px;
       }
       .crow label {
-        font-size: 17.2px;
+        font-size: 18px;
       }
       .ctrack {
         height: 16px;
       }
       .crow strong {
-        font-size: 17px;
+        font-size: 18px;
       }
       .miniCharts {
         gap: 8px;
@@ -1455,8 +1485,8 @@
         font-size: 18px;
       }
       .donutText span {
-        font-size: 16px;
-        line-height: 1.28;
+        font-size: 16.8px;
+        line-height: 1.26;
       }
       .takeawayGrid {
         gap: 7px;
@@ -1470,8 +1500,8 @@
         font-size: 16px;
       }
       .takeawayBox span {
-        font-size: 15.8px;
-        line-height: 1.26;
+        font-size: 16.6px;
+        line-height: 1.24;
       }
       .platformLine {
         gap: 7px;
@@ -1479,13 +1509,13 @@
       }
       .platformPill {
         padding: 8px 11px;
-        font-size: 15.8px;
+        font-size: 16.6px;
       }
       .localNote {
         margin-top: 12px;
         padding: 11px 14px;
-        font-size: 18px;
-        line-height: 1.36;
+        font-size: 19px;
+        line-height: 1.34;
       }
       .dataMini {
         gap: 8px;
@@ -1515,8 +1545,8 @@
       }
       .caseBox p,
       .caseBox li {
-        font-size: 17.4px;
-        line-height: 1.35;
+        font-size: 18.4px;
+        line-height: 1.33;
       }
       .flow {
         gap: 7px;
@@ -1530,8 +1560,8 @@
         font-size: 15.5px;
       }
       .flowItem span {
-        font-size: 16px;
-        line-height: 1.26;
+        font-size: 16.8px;
+        line-height: 1.24;
       }
       .sourceNote {
         margin-top: 7px;
@@ -1562,8 +1592,8 @@
       .alertMetric span {
         display: block;
         margin-top: 8px;
-        font-size: 13.2px;
-        line-height: 1.23;
+        font-size: 14px;
+        line-height: 1.22;
         color: #40566a;
         font-weight: 720;
       }
@@ -1598,8 +1628,8 @@
           rgba(255, 211, 117, 0.16)
         );
         border: 1px solid rgba(23, 34, 53, 0.1);
-        font-size: 16px;
-        line-height: 1.32;
+        font-size: 17px;
+        line-height: 1.3;
         color: #31475c;
       }
       .whoNote b {
@@ -1639,8 +1669,8 @@
         font-size: 17px;
       }
       .signalCard p {
-        font-size: 16px;
-        line-height: 1.34;
+        font-size: 17px;
+        line-height: 1.32;
         color: #394f64;
       }
       .whyHardGrid {
@@ -1690,12 +1720,12 @@
         margin-bottom: 10px;
       }
       .whyCard h3 {
-        font-size: 21px;
+        font-size: 22px;
         margin-bottom: 7px;
       }
       .whyCard p {
-        font-size: 16px;
-        line-height: 1.34;
+        font-size: 17px;
+        line-height: 1.32;
         color: #3b5065;
       }
       .pillRow {
@@ -1774,8 +1804,8 @@
         font-size: 18px;
       }
       .practicalCard p {
-        font-size: 15.6px;
-        line-height: 1.32;
+        font-size: 16.6px;
+        line-height: 1.3;
         color: #3b5065;
       }
       .homeMinGrid {
@@ -1798,8 +1828,8 @@
         font-size: 17px;
       }
       .homeMinCard p {
-        font-size: 15.2px;
-        line-height: 1.3;
+        font-size: 16.2px;
+        line-height: 1.28;
         color: #3b5065;
       }
       .homeMinNote {
@@ -1808,8 +1838,8 @@
         border-radius: 18px;
         background: rgba(255, 255, 255, 0.64);
         border: 1px solid rgba(23, 34, 53, 0.08);
-        font-size: 14.8px;
-        line-height: 1.28;
+        font-size: 15.8px;
+        line-height: 1.26;
         color: #385066;
       }
       .minimumRow {
@@ -1823,8 +1853,8 @@
         border-radius: 18px;
         background: rgba(255, 255, 255, 0.68);
         border: 1px solid rgba(23, 34, 53, 0.08);
-        font-size: 13.8px;
-        line-height: 1.22;
+        font-size: 14.8px;
+        line-height: 1.2;
         color: #355066;
         font-weight: 760;
       }
@@ -2542,6 +2572,11 @@
           padding: 16px 14px;
           border-radius: 24px;
         }
+        body.mobile-mode .resourcePreview {
+          width: 150px;
+          height: 190px;
+          margin-bottom: 12px;
+        }
         body.mobile-mode .resourceQrWrap {
           width: 206px;
           height: 206px;
@@ -2553,7 +2588,7 @@
           height: 176px;
         }
         body.mobile-mode .resourceCard h3 {
-          font-size: 22px;
+          font-size: 21px;
         }
         body.mobile-mode .resourceType {
           font-size: 16px;
@@ -3583,33 +3618,39 @@
           <div class="resourcesGrid">
             <div class="resourceCard">
               <a href="https://viktormajor.github.io/5.osztaly/kepernyo_helyett_kapcsolat.pdf" target="_blank" rel="noopener noreferrer" aria-label="Képernyő helyett kapcsolat PDF megnyitása">
+                <div class="resourcePreview">
+                  <img alt="Előnézet a Képernyő helyett kapcsolat PDF első oldaláról" src="Képernyőkép 2026-05-27 18-23-27.png" />
+                </div>
                 <div class="resourceQrWrap">
                   <img alt="QR-kód a Képernyő helyett kapcsolat PDF-hez" src="data:image/gif;base64,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" />
                 </div>
               </a>
               <h3>Képernyő helyett kapcsolat</h3>
               <div class="resourceType">rövid otthoni segédanyag</div>
-              <div class="resourceUrl">viktormajor.github.io/5.osztaly/kepernyo_helyett_kapcsolat.pdf</div>
             </div>
             <div class="resourceCard">
               <a href="https://viktormajor.github.io/5.osztaly/kepernyokcsokkento-ebook-bethesda-2024-teljes.pdf" target="_blank" rel="noopener noreferrer" aria-label="Képernyőcsökkentő e-book PDF megnyitása">
+                <div class="resourcePreview">
+                  <img alt="Előnézet a Képernyőcsökkentő e-book PDF első oldaláról" src="Képernyőkép 2026-05-27 18-24-11.png" />
+                </div>
                 <div class="resourceQrWrap">
                   <img alt="QR-kód a Képernyőcsökkentő e-book PDF-hez" src="data:image/gif;base64,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" />
                 </div>
               </a>
               <h3>Képernyőcsökkentő e-book</h3>
               <div class="resourceType">részletesebb olvasnivaló</div>
-              <div class="resourceUrl">viktormajor.github.io/5.osztaly/kepernyokcsokkento-ebook-bethesda-2024-teljes.pdf</div>
             </div>
             <div class="resourceCard">
               <a href="https://viktormajor.github.io/5.osztaly/szokaskoveto.pdf" target="_blank" rel="noopener noreferrer" aria-label="Szokáskövető PDF megnyitása">
+                <div class="resourcePreview">
+                  <img alt="Előnézet a Szokáskövető PDF első oldaláról" src="Képernyőkép 2026-05-27 18-22-33.png" />
+                </div>
                 <div class="resourceQrWrap">
                   <img alt="QR-kód a Szokáskövető PDF-hez" src="data:image/gif;base64,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" />
                 </div>
               </a>
               <h3>Szokáskövető</h3>
               <div class="resourceType">praktikus, nyomtatható segítség</div>
-              <div class="resourceUrl">viktormajor.github.io/5.osztaly/szokaskoveto.pdf</div>
             </div>
           </div>
           <div class="resourcesNote">
@@ -3715,8 +3756,13 @@
           if (!stage) return;
           stage.style.setProperty("--scale", "1");
           requestAnimationFrame(() => {
-            const maxW = window.innerWidth - 104;
-            const maxH = window.innerHeight - 86;
+            const rootStyles = getComputedStyle(document.documentElement);
+            const fitSafeX =
+              parseFloat(rootStyles.getPropertyValue("--fit-safe-x")) || 76;
+            const fitSafeY =
+              parseFloat(rootStyles.getPropertyValue("--fit-safe-y")) || 72;
+            const maxW = window.innerWidth - fitSafeX;
+            const maxH = window.innerHeight - fitSafeY;
             const rawW = Math.max(
               stage.scrollWidth,
               stage.getBoundingClientRect().width,
@@ -3725,7 +3771,7 @@
               stage.scrollHeight,
               stage.getBoundingClientRect().height,
             );
-            const scale = Math.min(1, maxW / rawW, maxH / rawH) * 0.985;
+            const scale = Math.min(1, maxW / rawW, maxH / rawH) * 0.99;
             stage.style.setProperty(
               "--scale",
               Math.max(0.45, scale).toFixed(3),
