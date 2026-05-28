@@ -768,8 +768,36 @@
         font-size: 66px;
         max-width: 1100px;
       }
+      .final .lead {
+        max-width: 1120px;
+      }
+      .finalPillars {
+        margin-top: 24px;
+        gap: 14px;
+      }
+      .finalPillars .card {
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 22px 18px;
+      }
+      .finalPillars .card h3 {
+        font-size: 31px;
+        line-height: 1.05;
+        margin-bottom: 12px;
+      }
+      .finalPillars .card p {
+        font-size: 22px;
+        line-height: 1.3;
+        color: #476075;
+      }
       .final .quote {
         font-size: 30px;
+        margin-top: 18px;
+        padding: 22px 24px;
       }
       .resourcesSlide .stage {
         width: min(1400px, calc(100vw - 40px));
@@ -1220,6 +1248,25 @@
         font-size: 17px !important;
         line-height: 1.36 !important;
         margin: 5px 0 !important;
+      }
+      .connectList {
+        margin-top: 10px;
+      }
+      .connectList li {
+        font-size: 17px !important;
+        line-height: 1.34 !important;
+        margin: 7px 0 !important;
+        color: #385166;
+      }
+      .connectList strong {
+        color: var(--ink);
+      }
+      .connectCue {
+        margin-top: 10px;
+        font-size: 18px;
+        line-height: 1.34;
+        color: #1f4f67;
+        font-weight: 820;
       }
       @media (max-width: 1100px) {
         .dataMini,
@@ -1728,6 +1775,17 @@
         line-height: 1.32;
         color: #3b5065;
       }
+      .kidVoice {
+        margin-top: 10px;
+        padding: 9px 11px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(23, 34, 53, 0.08);
+        font-size: 15.4px;
+        line-height: 1.28;
+        color: #4d6477;
+        font-weight: 760;
+      }
       .pillRow {
         display: flex;
         flex-wrap: wrap;
@@ -1970,6 +2028,17 @@
       }
       .final h2 {
         font-size: clamp(42px, 4.3vw, 56px);
+      }
+      .finalPillars .card {
+        min-height: 162px;
+        padding: 18px 14px;
+      }
+      .finalPillars .card h3 {
+        font-size: clamp(28px, 2.5vw, 34px);
+        margin-bottom: 9px;
+      }
+      .finalPillars .card p {
+        font-size: clamp(19px, 1.7vw, 22px);
       }
       .final .quote {
         font-size: clamp(22px, 2.1vw, 28px);
@@ -2888,7 +2957,7 @@
                   <strong>46%</strong>
                 </div>
                 <div class="crow">
-                  <label>Online konfliktus – gyerek</label>
+                  <label>Online-offline konfliktus – gyerek</label>
                   <div class="ctrack">
                     <div class="cfill red" style="--w: 73%"></div>
                   </div>
@@ -2953,7 +3022,7 @@
       <section class="slide">
         <div class="stage">
           <span class="kicker">5. Értelmezés</span>
-          <h2>A percepciós rés nem ellentmondás, hanem beszélgetési jelzés</h2>
+          <h2>A különbség nem ellentmondás, hanem beszélgetési jelzés</h2>
           <div class="vs">
             
             <div class="vsbox good">
@@ -2973,22 +3042,23 @@
             <div class="card compact">
               <h3>Monitorozás</h3>
               <p>
-                „Megnéztem, kivel játszol.” Ez szükséges lehet, de önmagában nem
-                mindig épít közös nyelvet.
+                A rálátás szükséges lehet, de önmagában nem mindig épít közös
+                nyelvet.
               </p>
             </div>
             <div class="card compact">
               <h3>Érdeklődés</h3>
               <p>
-                „Mutasd meg, mi ebben a jó.” Ez hidat épít a szülői világ és a
-                gyerek online világa között.
+                Meg lehet kérni a gyereket, hogy mutassa meg, mi ebben a jó. Ez
+                hidat építhet a szülői világ és az online élmény között.
               </p>
             </div>
             <div class="card compact">
               <h3>Biztonság</h3>
               <p>
-                „Ha baj van, először szólhatsz.” Ez növeli annak esélyét, hogy a
-                gyerek ne maradjon egyedül a problémával.
+                A gyerek számára legyen világos: ha baj van, először szólni
+                lehet. Ez növeli annak esélyét, hogy ne maradjon egyedül a
+                problémával.
               </p>
             </div>
           </div>
@@ -3000,13 +3070,16 @@
           <h2>Miért olyan nehéz letenni a telefont?</h2>
           <p class="lead">
             Nem csak akaraterő kérdése. A gyerek egyszerre van társas
-            helyzetben, platformlogikában és fejlődéslélektani nyomás alatt.
+            helyzetben, platformlogikában és kimaradástól való félelemben.
           </p>
           <div class="whyHardGrid">
             <div class="whyCard cool">
               <div class="cardNum">1</div>
               <h3>1. Társas tér</h3>
               <p>A barátok is ott vannak.</p>
+              <div class="kidVoice">
+                „Most nem tudok kilépni, mert a többiekkel vagyok.”
+              </div>
               <div class="pillRow">
                 <div class="dataPill"><b>67%</b> legalább hetente multiplayer</div>
                 <div class="dataPill"><b>60%</b> online is tartja a kapcsolatot barátaival</div>
@@ -3016,20 +3089,24 @@
               <div class="cardNum">2</div>
               <h3>2. Platformlogika</h3>
               <p>A rendszer visszahív.</p>
-              <div class="miniHighlight">Autoplay, jutalom, „még egy kör”.</div>
+              <div class="kidVoice">
+                „Még egy kör, még egy jutalom, még egy videó.”
+              </div>
+              <div class="miniHighlight">autoplay · jutalom · rang · napi belépés</div>
             </div>
             <div class="whyCard green">
               <div class="cardNum">3</div>
               <h3>3. FOMO</h3>
               <p>A kimaradás fájdalmas.</p>
-              <div class="miniHighlight">Sokszor a kapcsolódáshoz ragaszkodik.</div>
+              <div class="kidVoice">
+                „Ha most kilépek, holnap nem értem a poént.”
+              </div>
+              <div class="miniHighlight">poénok · chat · csapat · státusz</div>
             </div>
           </div>
           <div class="ribbon">
-            A mindennapok nyelvén: sokszor könnyebben működik, ha nem csak az
-            hangzik el, hogy „tedd le”, hanem előre tisztázódik, mikor van
-            utolsó kör, mikor lehet elköszönni, és mikor kerül a telefon
-            parkolóba.
+            Szülői fordítás: a jó szabály nem csak leállít, hanem segít
+            lezárni: utolsó kör, elköszönés, telefonparkoló.
           </div>
         </div>
       </section>
@@ -3173,8 +3250,8 @@
             </div>
           </div>
           <div class="tightNote">
-            Üzenet a gyereknek: nem maradsz egyedül, és felelősséged is van
-            abban, amit online írsz, küldesz vagy továbbadsz.
+            A gyerek felé az üzenet legyen kettős: nincs egyedül, de
+            felelőssége is van abban, amit online ír, küld vagy továbbad.
           </div>
         </div>
       </section>
@@ -3316,8 +3393,8 @@
             <div class="card compact">
               <h3>Amikor már mindenki fáradt</h3>
               <p>
-                „Azonnal leteszed, mert azt mondtam.” Rövid távon lezárhatja a
-                vitát, de könnyen növeli az ellenállást és a titkolózást.
+                A hirtelen leállítás rövid távon lezárhatja a vitát, de
+                könnyen növelheti az ellenállást és a titkolózást.
               </p>
             </div>
             <div class="card compact">
@@ -3338,7 +3415,7 @@
           <div class="vs">
             <div class="vsbox good">
               <div class="label">Kapcsolódó, határt tartó mondat</div>
-              <q>Értem, hogy fontos neked, de tartjuk a megbeszélt határt.</q>
+              <q>Ez fontos lehet a gyereknek, de a megbeszélt keret marad.</q>
               <p>
                 Ez nem támadja a gyereket, mégis világossá teszi, hogy a keret
                 nem indulatból születik.
@@ -3346,7 +3423,7 @@
             </div>
             <div class="vsbox good">
               <div class="label">Megnyugtató keret</div>
-              <q>Nem ellened vagyok, hanem az esti nyugalmat védem.</q>
+              <q>A keret nem a gyerek ellen szól, hanem az esti nyugalmat védi.</q>
               <p>
                 A gyerek így nem csak tiltást hall, hanem jobban érti a keret
                 mögötti célt.
@@ -3355,39 +3432,32 @@
           </div>
         </div>
       </section>
+      
       <section class="slide">
         <div class="stage">
           <span class="kicker">13. Családdinamika</span>
           <h2>A képernyő sokszor gyors feszültségkezelő eszköz</h2>
           <p class="lead">
-            Sok családban ez érthető túlélési megoldás egy fáradt hétköznapon:
-            a telefon rövid távon működik, csend lesz, lekötődik, vége a
-            vitának. A kérdés inkább az, marad-e mellette más út is a
-            megnyugvásra, várakozásra és kapcsolódásra. Innen fordulunk át a
-            megoldások felé: nem tökéletes házirend kell, hanem néhány
-            ismételhető otthoni rutin.
+            Sok családban a képernyő egy fáradt hétköznapon gyors megoldás:
+            csend lesz, lekötődik, vége a vitának. A kérdés nem az, hogy ez
+            mindig rossz-e, hanem hogy marad-e mellette más út is a
+            megnyugvásra.
           </p>
-          <div class="grid two">
-            <div class="panel" style="padding: 13px 14px">
-              <h3>Amikor a képernyő „megoldás”</h3>
-              <ul class="compactList">
-                <li>fáradt a család, nincs erő újabb konfliktusra;</li>
-                <li>a gyerek unatkozik vagy nyűgös;</li>
-                <li>a szülőnek kell 10 perc nyugalom;</li>
-                <li>a testvérkonfliktust gyorsan csillapítani kell;</li>
-                <li>a telefon azonnal működik, a nevelés lassabb.</li>
-              </ul>
-            </div>
-            <div class="panel" style="padding: 13px 14px">
-              <h3>Mit érdemes mellé építeni?</h3>
-              <ul class="compactList">
-                <li>unalomtűrés: nem minden üres percet szükséges kitölteni;</li>
-                <li>mozgás vagy séta mint levezetés;</li>
-                <li>offline kapcsolódás: rövid közös rituálék;</li>
-                <li>érzelemnév: „látom, most nagyon felpörögtél”;</li>
-                <li>szülői minta: beszélgetés közben félretett telefon.</li>
-              </ul>
-            </div>
+          <div class="panel" style="padding: 14px 16px; margin-top: 16px">
+            <h3>Mit érdemes mellé építeni?</h3>
+            <ul class="compactList">
+              <li>unalomtűrés;</li>
+              <li>mozgás vagy séta;</li>
+              <li>rövid offline rituálék;</li>
+              <li>érzelemnév: „látom, felpörögtél”;</li>
+              <li>szülői minta: félretett telefon.</li>
+            </ul>
+          </div>
+          <div class="localNote" style="margin-top: 12px">
+            Ha a képernyő néha megnyugtató eszköz, akkor két dolgot érdemes
+            építeni mellé: más megnyugvási utakat és érdeklődő kapcsolódást. A
+            kapcsolódás is segít: néha elég annyi, hogy érdeklődve figyeljünk,
+            és megkérjük a gyereket, mutassa meg, mi ebben a jó.
           </div>
           <div
             class="kicker dark"
@@ -3422,9 +3492,9 @@
             </div>
           </div>
           <div class="ribbon">
-            A helyi adatok alapján a képernyő nemcsak szórakozás, hanem néha
-            hangulatszabályozó eszköz is. Ez nem diagnózis, és nem feltétlenül
-            baj: a kérdés inkább az, marad-e más út is a megnyugvásra.
+            A helyi adatok alapján a képernyő néha hangulatszabályozó eszköz
+            is. A cél nem az, hogy mindent tiltsunk, hanem hogy legyen más
+            megnyugvási út is.
           </div>
         </div>
       </section>
@@ -3462,7 +3532,7 @@
           <div class="vs">
             <div class="vsbox bad">
               <div class="label">Nehezebben működő szabály</div>
-              <q>Ne telefonozz annyit!</q>
+              <q>A túl általános, kevesebb telefonozást kérő mondatok</q>
               <p>
                 Túl általános, vita közben mást jelent a szülőnek és mást a
                 gyereknek.
@@ -3487,9 +3557,49 @@
           </div>
         </div>
       </section>
+      <section class="slide">
+        <div class="stage">
+          <span class="kicker">15. Kapcsolódás</span>
+          <h2>Nem kell gamernek lenni</h2>
+          <p class="lead">
+            Elég, ha kíváncsi felnőttként, érdeklődve figyelünk, és néhány jó
+            kérdéssel belépünk a gyerek digitális világába. Nem azonnal
+            ellenőrizni vagy megítélni kell, hanem először érteni, mit él meg
+            ott.
+          </p>
+          <div class="grid three">
+            <div class="card compact goodSoft">
+              <h3>Kérdések</h3>
+              <p>3 kedvenc videó megmutatása</p>
+              <p>Mi a küldetés a játékban?</p>
+              <p>Kikkel van jelen az online térben?</p>
+            </div>
+            <div class="card compact goodSoft">
+              <h3>Fordítás</h3>
+              <p>Mit jelent a skin, Robux vagy lobby?</p>
+              <p>Mi számít fair kilépésnek?</p>
+              <p>Miért fontos a rang vagy a csapat?</p>
+            </div>
+            <div class="card compact goodSoft">
+              <h3>Biztonság</h3>
+              <p>Hol lehet jelenteni?</p>
+              <p>Hogy lehet tiltani?</p>
+            </div>
+          </div>
+          <div class="localNote">
+            Tanuljunk pár szót: skin · Robux · lobby · quest · rank · report ·
+            block · screenshot
+          </div>
+          <div class="ribbon">
+            Nem kell szakértőnek lenni. Elég, ha érdeklődve figyelünk, és a
+            gyerek azt érzi: a felnőtt nem csak leállítani akarja, hanem érteni
+            is próbálja.
+          </div>
+        </div>
+      </section>
       <section class="slide dense">
         <div class="stage">
-          <span class="kicker">15. Technikai segítség</span>
+          <span class="kicker">16. Technikai segítség</span>
           <h2>A szabályt nem csak megbeszélni, beállítani is lehet</h2>
           <p class="lead">
             A technikai beállítás nem nevelés helyett van, hanem a mindennapi
@@ -3497,7 +3607,7 @@
           </p>
           <div class="grid four">
             <div class="rule">
-              <b>Google Family Link</b>
+              <b>Google Family Link, minden eszközre van megoldás!</b>
               <p>appkorlát, nem kell harc, csak együttérzés</p>
             </div>
            
@@ -3505,6 +3615,7 @@
               <b>Router / Wi-Fi időzítés</b>
               <p>otthoni időzítés</p>
             </div>
+            
             <div class="rule">
               <b>Fontos korlát</b>
               <p>nem helyettesíti a beszélgetést</p>
@@ -3517,97 +3628,34 @@
         </div>
       </section>
       
-      <section class="slide dense">
-        <div class="stage">
-          <span class="kicker">16. Közös folyamat</span>
-          <h2>Nem kell mindent egyszerre megoldani</h2>
-          <p class="lead">
-            Egy fáradt családnak sokszor nem újabb projekt segít, hanem néhány
-            kicsi, kipróbálható otthoni kapaszkodó.
-          </p>
-          <div class="practicalGrid">
-            <div class="practicalCard">
-              <b>1. Utolsó kör</b>
-              <p>Segíthet, ha előre tisztázódik, mikor indulhat az utolsó játék vagy videó.</p>
-            </div>
-            <div class="practicalCard">
-              <b>2. Telefonparkoló</b>
-              <p>
-                Egyes családoknál működhet, ha este a telefon közös, látható
-                helyre kerül. Nem büntetés, hanem alvásvédő rutin.
-              </p>
-            </div>
-            <div class="practicalCard">
-              <b>3. Segítségkérési mondat</b>
-              <p>
-                Ha online baj van, először lehessen szólni. Nem a telefonelvétel
-                az első reakció.
-              </p>
-            </div>
-          </div>
-          <div class="panel" style="margin-top: 10px; padding: 12px 13px">
-            <h3>Két kipróbálható otthoni kapaszkodó</h3>
-            <div class="homeMinGrid">
-              <div class="homeMinCard">
-                <b>Képernyőmentes zónák</b>
-                <p>
-                  Sok családban segíthet, ha az étkezőasztal és a hálószoba
-                  képernyőmentes tér. Ez gyakran stabilabb, mint a napi percek
-                  körüli alkudozás — főleg, ha a felnőtt is tartja.
-                </p>
-              </div>
-              <div class="homeMinCard">
-                <b>Lefordított telefon</b>
-                <p>
-                  Ha a gyerek beszél hozzánk, a telefont kijelzővel lefelé
-                  fordítjuk vagy eltesszük. Ez egy apró jelzés lehet: most rád
-                  figyelek.
-                </p>
-              </div>
-            </div>
-            <div class="homeMinNote">
-              Ezek nem nagy szabályrendszerek, hanem apró családi
-              mikroszokások. Pont ezért könnyebben tarthatók.
-            </div>
-          </div>
-          <div class="ribbon">
-            A cél nem egységes recept, hanem kevesebb vita és több
-            kiszámíthatóság néhány működő, ismételhető családi rutin mentén.
-          </div>
-        </div>
-      </section>
+      
       <section class="slide final">
         <div class="stage">
           <span class="kicker">17. Zárás</span>
-          <h2>Nem hibást keresünk, hanem közös kapaszkodókat</h2>
-          <div class="grid three">
+          <h2>Mit érdemes ebből hazavinni?</h2>
+          <p class="lead">
+            Nem tökéletes digitális szabályrendszerre van szükség, hanem
+            néhány olyan kapaszkodóra, amit a gyerek is ért, és a család is
+            tartani tud.
+          </p>
+          <div class="grid three finalPillars">
             <div class="card">
-              <h3>Rálátás</h3>
-              <p>
-                Nem csak az látszik, mennyit volt telefonon, hanem az is
-                beszélgetési pont lehet, mit csinált ott és kikkel volt.
-              </p>
+              <h3>Kapcsolat</h3>
+              <p>érdeklődés, jelenlét, közös nyelv</p>
             </div>
             <div class="card">
-              <h3>Kiszámítható határ</h3>
-              <p>
-                Nem dühből, nem kiszámíthatatlanul, hanem előre ismert, alvást
-                és kapcsolatot védő keretek mentén.
-              </p>
+              <h3>Keret</h3>
+              <p>előre ismert, kiszámítható határok</p>
             </div>
             <div class="card">
-              <h3>Biztonságos segítségkérés</h3>
-              <p>
-                A gyerek tudhatja: ha online rossz történik, nem marad egyedül,
-                és nem a büntetés az első reakció.
-              </p>
+              <h3>Segítségkérés</h3>
+              <p>ha baj van, lehessen szólni</p>
             </div>
           </div>
-          <div class="quote" style="margin-top: 28px">
-            Ha ebből az estéből csak egy gondolat marad meg: nem az a cél, hogy
-            minden család ugyanúgy szabályozza a telefont, hanem hogy a gyerek
-            tudja, hol van a határ, és baj esetén merjen szólni egy
-            felnőttnek.
+          <div class="quote">
+            Ha csak egy dolog marad meg: nem az a cél, hogy minden család
+            ugyanúgy szabályozza a képernyőt, hanem hogy a gyerek tudja, hol
+            van a határ, és baj esetén merjen szólni egy felnőttnek.
           </div>
         </div>
       </section>
